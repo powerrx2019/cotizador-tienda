@@ -237,6 +237,43 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:var(--muted)}
 
+
+/* ═══ SABORES / NOTAS POR PRODUCTO ═══ */
+.qi-flavors{width:100%;margin-top:8px;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:7px 9px;font-size:12px;font-family:inherit;outline:none;box-sizing:border-box}
+.qi-flavors:focus{border-color:var(--accent3)}
+.qi-flavors::placeholder{color:var(--muted)}
+.qi-flavor-hint{font-size:10px;margin-top:3px;min-height:12px}
+.qi-flavor-hint.ok{color:#22c55e}
+.qi-flavor-hint.warn{color:#f59e0b}
+/* ═══ HISTORIAL DE COTIZACIONES ═══ */
+.hist-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:var(--surface);margin-bottom:8px}
+.hist-main{flex:1;min-width:0}
+.hist-top{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:1px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hist-top .hist-folio{color:var(--accent2)}
+.hist-sub{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5}
+.hist-btns{display:flex;gap:6px;flex-shrink:0}
+.hist-btns button{border-radius:8px;padding:8px 14px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.hist-open{background:var(--accent3);border:none;color:#000}
+.hist-open:hover{background:#00cfea}
+.hist-del{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.hist-del:hover{border-color:#ff4444;color:#ff6b6b}
+.hist-empty{text-align:center;color:var(--muted);padding:30px 10px;font-size:13px;line-height:1.7}
+.cotz-toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--card);border:1px solid var(--accent3);color:var(--text);padding:11px 18px;border-radius:10px;font-size:13px;z-index:1200;max-width:90vw;text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .25s}
+.cotz-toast.show{opacity:1}
+@media(max-width:600px){.hist-item{flex-direction:column;align-items:stretch}.hist-btns button{flex:1}}
+/* ═══ PRODUCTOS MANUALES ═══ */
+.manual-add-box{background:var(--card);border:1px solid var(--accent3);border-radius:12px;padding:16px;margin-top:20px}
+.manual-add-box .manual-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:2px;color:var(--accent3);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.manual-fields{display:grid;grid-template-columns:1fr 130px 80px auto;gap:8px;align-items:end}
+.manual-fields .mf-group{display:flex;flex-direction:column;gap:4px}
+.manual-fields .mf-group label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
+.manual-fields .mf-group input{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:8px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;transition:border-color .2s;width:100%}
+.manual-fields .mf-group input:focus{border-color:var(--accent3)}
+.btn-add-manual{background:var(--accent3);border:none;color:#000;padding:0 16px;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;white-space:nowrap;height:36px;align-self:end}
+.btn-add-manual:hover{background:#00cfea;transform:translateY(-1px)}
+.qi-manual-badge{font-size:9px;background:rgba(0,229,255,.15);color:var(--accent3);border:1px solid var(--accent3);border-radius:4px;padding:1px 5px;margin-left:5px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;vertical-align:middle}
+@media(max-width:800px){.manual-fields{grid-template-columns:1fr 1fr}.btn-add-manual{grid-column:1/-1;height:40px}}
+
 @media(max-width:1100px){.cotz-layout{grid-template-columns:1fr}.cotz-right{position:relative;height:auto}}
 @media(max-width:900px){.kpi-row{grid-template-columns:repeat(3,1fr)}.charts-row,.charts-row2{grid-template-columns:1fr}}
 </style>
@@ -277,9 +314,9 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
 
     <div class="section-title"><span class="dot"></span> Tipo de Precio Base</div>
     <div class="price-selector" id="global-price-selector">
-      <button class="ptype-btn active" onclick="setGlobalPrice('PRECIO VENTA')" data-key="PRECIO VENTA">💰 Precio Venta</button>
+      <button class="ptype-btn" onclick="setGlobalPrice('PRECIO VENTA')" data-key="PRECIO VENTA">💰 Precio Venta</button>
       <button class="ptype-btn" onclick="setGlobalPrice('MEDIO MAYOREO')" data-key="MEDIO MAYOREO">📦 Medio Mayoreo</button>
-      <button class="ptype-btn" onclick="setGlobalPrice('MAYOREO 3 MIL')" data-key="MAYOREO 3 MIL">📦 Mayoreo $3K</button>
+      <button class="ptype-btn active" onclick="setGlobalPrice('MAYOREO 3 MIL')" data-key="MAYOREO 3 MIL">📦 Mayoreo $3K</button>
       <button class="ptype-btn" onclick="setGlobalPrice('MAYOREO 6 MIL')" data-key="MAYOREO 6 MIL">🏭 Mayoreo $6K</button>
       <button class="ptype-btn" onclick="setGlobalPrice('CLIENTES FORÁNEOS')" data-key="CLIENTES FORÁNEOS">🚚 Foráneos</button>
     </div>
@@ -301,7 +338,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         <option value="1201-9999">+$1,200</option>
       </select>
     </div>
-    <div class="results-count" id="results-count">198 productos encontrados</div>
+    <div class="results-count" id="results-count">196 productos encontrados</div>
     <div class="product-list" id="product-list"><div class="product-card" style="--cat-color:#84ffff" onclick="addToQuote(0)">
       <div class="product-info">
         <div class="product-name" title="43 BCAA + GLUTAMINA">43 BCAA + GLUTAMINA</div>
@@ -1523,7 +1560,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         </div>
       </div>
       <div>
-        <div class="product-price">$1,340<span class="price-lbl">Precio Venta</span></div>
+        <div class="product-price">$1,470<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
     </div><div class="product-card" style="--cat-color:#ff8c42" onclick="addToQuote(102)">
@@ -1727,7 +1764,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         </div>
       </div>
       <div>
-        <div class="product-price">$2,490<span class="price-lbl">Precio Venta</span></div>
+        <div class="product-price">$2,520<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
     </div><div class="product-card" style="--cat-color:#ff3d00" onclick="addToQuote(119)">
@@ -1739,7 +1776,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         </div>
       </div>
       <div>
-        <div class="product-price">$800<span class="price-lbl">Precio Venta</span></div>
+        <div class="product-price">$840<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
     </div><div class="product-card" style="--cat-color:#ff3d00" onclick="addToQuote(120)">
@@ -1751,7 +1788,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         </div>
       </div>
       <div>
-        <div class="product-price">$1,460<span class="price-lbl">Precio Venta</span></div>
+        <div class="product-price">$1,600<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
     </div><div class="product-card" style="--cat-color:#ff3d00" onclick="addToQuote(121)">
@@ -1823,7 +1860,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         </div>
       </div>
       <div>
-        <div class="product-price">$820<span class="price-lbl">Precio Venta</span></div>
+        <div class="product-price">$840<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
     </div><div class="product-card" style="--cat-color:#ff3d00" onclick="addToQuote(127)">
@@ -1835,7 +1872,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         </div>
       </div>
       <div>
-        <div class="product-price">$1,280<span class="price-lbl">Precio Venta</span></div>
+        <div class="product-price">$1,290<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
     </div><div class="product-card" style="--cat-color:#ff3d00" onclick="addToQuote(128)">
@@ -1847,7 +1884,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         </div>
       </div>
       <div>
-        <div class="product-price">$1,850<span class="price-lbl">Precio Venta</span></div>
+        <div class="product-price">$1,870<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
     </div><div class="product-card" style="--cat-color:#ff3d00" onclick="addToQuote(129)">
@@ -1859,7 +1896,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         </div>
       </div>
       <div>
-        <div class="product-price">$1,460<span class="price-lbl">Precio Venta</span></div>
+        <div class="product-price">$1,490<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
     </div><div class="product-card" style="--cat-color:#ff3d00" onclick="addToQuote(130)">
@@ -1871,7 +1908,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         </div>
       </div>
       <div>
-        <div class="product-price">$1,270<span class="price-lbl">Precio Venta</span></div>
+        <div class="product-price">$1,320<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
     </div><div class="product-card" style="--cat-color:#ff3d00" onclick="addToQuote(131)">
@@ -1883,7 +1920,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         </div>
       </div>
       <div>
-        <div class="product-price">$1,720<span class="price-lbl">Precio Venta</span></div>
+        <div class="product-price">$1,790<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
     </div><div class="product-card" style="--cat-color:#ff80ab" onclick="addToQuote(132)">
@@ -2159,7 +2196,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         </div>
       </div>
       <div>
-        <div class="product-price">$690<span class="price-lbl">Precio Venta</span></div>
+        <div class="product-price">$760<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
     </div><div class="product-card" style="--cat-color:#ff3d00" onclick="addToQuote(155)">
@@ -2447,7 +2484,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         </div>
       </div>
       <div>
-        <div class="product-price">$790<span class="price-lbl">Precio Venta</span></div>
+        <div class="product-price">$820<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
     </div><div class="product-card" style="--cat-color:#b388ff" onclick="addToQuote(179)">
@@ -2522,19 +2559,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         <div class="product-price">$250<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
-    </div><div class="product-card" style="--cat-color:#ff8c42" onclick="addToQuote(185)">
-      <div class="product-info">
-        <div class="product-name" title="SUPER PUMP MAX">SUPER PUMP MAX</div>
-        <div class="product-meta">
-          <span class="cat-badge" style="background:#ff8c4222;color:#ff8c42">PRE ENTRENOS</span>
-          <span class="brand-tag">GASPARI</span>
-        </div>
-      </div>
-      <div>
-        <div class="product-price">$590<span class="price-lbl">Precio Venta</span></div>
-      </div>
-      <button class="add-btn" title="Agregar a cotización">+</button>
-    </div><div class="product-card" style="--cat-color:#ea80fc" onclick="addToQuote(186)">
+    </div><div class="product-card" style="--cat-color:#ea80fc" onclick="addToQuote(185)">
       <div class="product-info">
         <div class="product-name" title="TESTROL GOLD">TESTROL GOLD</div>
         <div class="product-meta">
@@ -2546,7 +2571,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         <div class="product-price">$530<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
-    </div><div class="product-card" style="--cat-color:#ea80fc" onclick="addToQuote(187)">
+    </div><div class="product-card" style="--cat-color:#ea80fc" onclick="addToQuote(186)">
       <div class="product-info">
         <div class="product-name" title="TESTROL ORIGINAL">TESTROL ORIGINAL</div>
         <div class="product-meta">
@@ -2558,7 +2583,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         <div class="product-price">$500<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
-    </div><div class="product-card" style="--cat-color:#ff8c42" onclick="addToQuote(188)">
+    </div><div class="product-card" style="--cat-color:#ff8c42" onclick="addToQuote(187)">
       <div class="product-info">
         <div class="product-name" title="THE CURSE">THE CURSE</div>
         <div class="product-meta">
@@ -2570,7 +2595,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         <div class="product-price">$500<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
-    </div><div class="product-card" style="--cat-color:#ff8c42" onclick="addToQuote(189)">
+    </div><div class="product-card" style="--cat-color:#ff8c42" onclick="addToQuote(188)">
       <div class="product-info">
         <div class="product-name" title="TOTAL WAR">TOTAL WAR</div>
         <div class="product-meta">
@@ -2582,7 +2607,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         <div class="product-price">$530<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
-    </div><div class="product-card" style="--cat-color:#ff8c42" onclick="addToQuote(190)">
+    </div><div class="product-card" style="--cat-color:#ff8c42" onclick="addToQuote(189)">
       <div class="product-info">
         <div class="product-name" title="VAPOR X">VAPOR X</div>
         <div class="product-meta">
@@ -2594,19 +2619,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         <div class="product-price">$460<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
-    </div><div class="product-card" style="--cat-color:#ff3d00" onclick="addToQuote(191)">
-      <div class="product-info">
-        <div class="product-name" title="VEGAN NATURALS">VEGAN NATURALS</div>
-        <div class="product-meta">
-          <span class="cat-badge" style="background:#ff3d0022;color:#ff3d00">PROTEINAS</span>
-          <span class="brand-tag">ADVANCED NUTRITION</span>
-        </div>
-      </div>
-      <div>
-        <div class="product-price">$850<span class="price-lbl">Precio Venta</span></div>
-      </div>
-      <button class="add-btn" title="Agregar a cotización">+</button>
-    </div><div class="product-card" style="--cat-color:#ff8c42" onclick="addToQuote(192)">
+    </div><div class="product-card" style="--cat-color:#ff8c42" onclick="addToQuote(190)">
       <div class="product-info">
         <div class="product-name" title="VENOM INFERNO">VENOM INFERNO</div>
         <div class="product-meta">
@@ -2618,7 +2631,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         <div class="product-price">$520<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
-    </div><div class="product-card" style="--cat-color:#00e676" onclick="addToQuote(193)">
+    </div><div class="product-card" style="--cat-color:#00e676" onclick="addToQuote(191)">
       <div class="product-info">
         <div class="product-name" title="VITAMINA C INSANE">VITAMINA C INSANE</div>
         <div class="product-meta">
@@ -2630,7 +2643,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         <div class="product-price">$340<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
-    </div><div class="product-card" style="--cat-color:#ff3d00" onclick="addToQuote(194)">
+    </div><div class="product-card" style="--cat-color:#ff3d00" onclick="addToQuote(192)">
       <div class="product-info">
         <div class="product-name" title="WHEY HD">WHEY HD</div>
         <div class="product-meta">
@@ -2642,7 +2655,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         <div class="product-price">$990<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
-    </div><div class="product-card" style="--cat-color:#ff3d00" onclick="addToQuote(195)">
+    </div><div class="product-card" style="--cat-color:#ff3d00" onclick="addToQuote(193)">
       <div class="product-info">
         <div class="product-name" title="XTINCTION MULTISABOR">XTINCTION MULTISABOR</div>
         <div class="product-meta">
@@ -2654,7 +2667,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         <div class="product-price">$850<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
-    </div><div class="product-card" style="--cat-color:#ff4081" onclick="addToQuote(196)">
+    </div><div class="product-card" style="--cat-color:#ff4081" onclick="addToQuote(194)">
       <div class="product-info">
         <div class="product-name" title="YOHIMBINE">YOHIMBINE</div>
         <div class="product-meta">
@@ -2666,7 +2679,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         <div class="product-price">$350<span class="price-lbl">Precio Venta</span></div>
       </div>
       <button class="add-btn" title="Agregar a cotización">+</button>
-    </div><div class="product-card" style="--cat-color:#6b7194" onclick="addToQuote(197)">
+    </div><div class="product-card" style="--cat-color:#6b7194" onclick="addToQuote(195)">
       <div class="product-info">
         <div class="product-name" title="ZMAG GAT">ZMAG GAT</div>
         <div class="product-meta">
@@ -2681,6 +2694,27 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
     </div></div>
   </div>
 
+
+    <!-- ═══ AGREGAR PRODUCTO MANUAL ═══ -->
+    <div class="manual-add-box">
+      <div class="manual-title">✏️ Agregar Producto Manual</div>
+      <div class="manual-fields">
+        <div class="mf-group">
+          <label>Nombre del producto</label>
+          <input type="text" id="manual-name" placeholder="Ej. Vitamina D3 Genérica" onkeydown="if(event.key==='Enter')addManualProduct()">
+        </div>
+        <div class="mf-group">
+          <label>Precio unitario ($)</label>
+          <input type="number" id="manual-price" placeholder="0.00" min="0" step="0.01" onkeydown="if(event.key==='Enter')addManualProduct()">
+        </div>
+        <div class="mf-group">
+          <label>Cantidad</label>
+          <input type="number" id="manual-qty" placeholder="1" min="1" value="1" onkeydown="if(event.key==='Enter')addManualProduct()">
+        </div>
+        <button class="btn-add-manual" onclick="addManualProduct()">+ Agregar</button>
+      </div>
+    </div>
+
   <!-- RIGHT: Quote panel -->
   <div class="cotz-right">
     <div class="quote-header">
@@ -2689,7 +2723,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
           Cotización
           <span style="font-size:12px;color:var(--muted);font-family:'Barlow',sans-serif;font-weight:400;letter-spacing:0" id="quote-items-summary"></span>
         </div>
-        <div class="quote-num" id="quote-num">COT-001 · <span id="quote-date">14/10/2026</span></div>
+        <div class="quote-num" id="quote-num">COT-002 · <span id="quote-date">25/10/2026</span></div>
       </div>
     </div>
 
@@ -2718,6 +2752,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
         <button class="btn-secondary" onclick="clearQuote()">🗑️ Limpiar</button>
         <button class="btn-secondary" onclick="copyQuote()">📋 Copiar</button>
       </div>
+      <button class="btn-secondary" onclick="histOpen()">🕘 Historial de cotizaciones (<span id="hist-count">1</span>)</button>
       <button class="btn-whatsapp" onclick="shareWhatsApp()">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
         Enviar por WhatsApp
@@ -2747,10 +2782,10 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
 </div>
 <main>
   <div class="kpi-row">
-    <div class="kpi" style="--kpi-color:#00e040"><span class="icon">📦</span><div class="value" id="kpi-prods">198</div><div class="label">Productos</div><div class="sub">en catálogo</div></div>
-    <div class="kpi" style="--kpi-color:#ff8c42"><span class="icon">🏷️</span><div class="value" id="kpi-avgprice">$610</div><div class="label">Precio Promedio</div></div>
-    <div class="kpi" style="--kpi-color:#00e5ff"><span class="icon">💹</span><div class="value" id="kpi-discount">27.3%</div><div class="label">Dto. Prom. Mayoreo 6K</div></div>
-    <div class="kpi" style="--kpi-color:#00e676"><span class="icon">🏆</span><div class="value" id="kpi-topcat">PROTEINAS</div><div class="label">Categoría Líder</div><div class="sub" id="kpi-topcat-n">44 productos</div></div>
+    <div class="kpi" style="--kpi-color:#00e040"><span class="icon">📦</span><div class="value" id="kpi-prods">196</div><div class="label">Productos</div><div class="sub">en catálogo</div></div>
+    <div class="kpi" style="--kpi-color:#ff8c42"><span class="icon">🏷️</span><div class="value" id="kpi-avgprice">$612</div><div class="label">Precio Promedio</div></div>
+    <div class="kpi" style="--kpi-color:#00e5ff"><span class="icon">💹</span><div class="value" id="kpi-discount">27.6%</div><div class="label">Dto. Prom. Mayoreo 6K</div></div>
+    <div class="kpi" style="--kpi-color:#00e676"><span class="icon">🏆</span><div class="value" id="kpi-topcat">PROTEINAS</div><div class="label">Categoría Líder</div><div class="sub" id="kpi-topcat-n">43 productos</div></div>
     <div class="kpi" style="--kpi-color:#c97dff"><span class="icon">⭐</span><div class="value" id="kpi-topbrand">BLIFE</div><div class="label">Marca Líder</div><div class="sub" id="kpi-topbrand-n">30 productos</div></div>
   </div>
   <div class="charts-row">
@@ -2772,7 +2807,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
     </div>
   </div>
   <div class="table-card">
-    <div class="table-header"><div class="card-title" style="margin:0"><span class="dot"></span>Tabla de Productos</div><span id="table-count" style="color:var(--muted);font-size:12px">198 productos</span></div>
+    <div class="table-header"><div class="card-title" style="margin:0"><span class="dot"></span>Tabla de Productos</div><span id="table-count" style="color:var(--muted);font-size:12px">196 productos</span></div>
     <div class="table-scroll"><table><thead><tr>
       <th onclick="sortTable('NOMBRE DEL PRODUCTO')">Producto ↕</th>
       <th onclick="sortTable('CATEGORIA')">Categoría ↕</th>
@@ -2919,11 +2954,11 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
     <td><span class="badge" style="background:#40c4ff22;color:#40c4ff">AMINOACIDOS</span></td>
     <td>MUTANT</td>
     <td class="price-cell" style="color:#ff8c42">$400</td>
-    <td class="price-cell" style="color:#aab">$274</td>
-    <td class="price-cell" style="color:#00e5ff">$259</td>
-    <td class="price-cell" style="color:#aab">$324</td>
-    <td class="discount-cell">▼ 35.3%</td></tr></tbody></table></div>
-    <div class="pagination" id="pagination"><span>Mostrando 1–20 de 198</span>&nbsp;<button class="pag-btn" onclick="goPage(0)" disabled="">‹</button><button class="pag-btn active" onclick="goPage(1)">1</button><button class="pag-btn" onclick="goPage(2)">2</button><span style="color:var(--muted)">…</span><span style="color:var(--muted)">…</span><button class="pag-btn" onclick="goPage(9)">9</button><button class="pag-btn" onclick="goPage(10)">10</button><button class="pag-btn" onclick="goPage(2)">›</button></div>
+    <td class="price-cell" style="color:#aab">$262</td>
+    <td class="price-cell" style="color:#00e5ff">$244</td>
+    <td class="price-cell" style="color:#aab">$332</td>
+    <td class="discount-cell">▼ 39.0%</td></tr></tbody></table></div>
+    <div class="pagination" id="pagination"><span>Mostrando 1–20 de 196</span>&nbsp;<button class="pag-btn" onclick="goPage(0)" disabled="">‹</button><button class="pag-btn active" onclick="goPage(1)">1</button><button class="pag-btn" onclick="goPage(2)">2</button><span style="color:var(--muted)">…</span><span style="color:var(--muted)">…</span><button class="pag-btn" onclick="goPage(9)">9</button><button class="pag-btn" onclick="goPage(10)">10</button><button class="pag-btn" onclick="goPage(2)">›</button></div>
   </div>
 </main>
 </div>
@@ -2942,6 +2977,22 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
     </div>
   </div>
 </div>
+
+<!-- HISTORIAL MODAL -->
+<div class="modal-overlay" id="modal-history" onclick="if(event.target===this)histClose()">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>🕘 Historial de cotizaciones</h2>
+      <button class="modal-close" onclick="histClose()">×</button>
+    </div>
+    <div class="modal-body" id="hist-body"></div>
+    <div class="modal-actions">
+      <span style="margin-right:auto;font-size:11px;color:var(--muted)">Se guardan 15 días en este dispositivo</span>
+      <button class="btn-secondary" style="width:auto;padding:9px 20px" onclick="histClose()">Cerrar</button>
+    </div>
+  </div>
+</div>
+<div class="cotz-toast" id="cotz-toast"></div>
 
 <!-- UPLOAD MODAL -->
 <div class="modal-overlay" id="modal-upload" onclick="closeUploadModal(event)">
@@ -2989,14 +3040,14 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
 
       <!-- Preview -->
       <div id="upload-preview" style="display: block;">
-        <div class="preview-title" id="preview-title">Vista previa — 198 productos detectados</div>
+        <div class="preview-title" id="preview-title">Vista previa — 196 productos detectados</div>
         <div style="overflow-x:auto;max-height:180px;overflow-y:auto;margin-top:10px">
           <table id="preview-table" style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr><th>NOMBRE DEL PRODUCTO</th><th>CATEGORIA</th><th>MARCA</th><th>PRECIO VENTA</th><th>MAYOREO 3 MIL</th><th>MAYOREO 6 MIL</th><th>MEDIO MAYOREO</th><th>CLIENTES FORÁNEOS</th></tr></thead><tbody><tr><td>43 BCAA + GLUTAMINA</td><td>AMINOACIDOS/GLUTAMINAS</td><td>43 SUPPLEMENTS</td><td>390</td><td>255</td><td>237</td><td>325</td><td>290</td></tr><tr><td>43 ZERO 2.4 KG</td><td>PROTEINAS</td><td>43 SUPPLEMENTS</td><td>600</td><td>475</td><td>460</td><td>525</td><td>500</td></tr><tr><td>43 ZERO 6 KG</td><td>PROTEINAS</td><td>43 SUPPLEMENTS</td><td>990</td><td>785</td><td>762</td><td>915</td><td>850</td></tr><tr><td>ACXION</td><td>FARMACOLOGIA</td><td>IFA</td><td>490</td><td>340</td><td>325</td><td>390</td><td>365</td></tr><tr><td>AMINO ENERGY ON CHICO</td><td>AMINOACIDOS</td><td>ON</td><td>480</td><td>335</td><td>320</td><td>385</td><td>360</td></tr></tbody></table>
         </div>
       </div>
 
       <!-- Status -->
-      <div id="upload-status" style="display: block; margin-top: 14px; padding: 12px; border-radius: 8px; font-size: 13px; background: rgba(0, 230, 118, 0.1); border: 1px solid var(--green); color: var(--green);">✅ ¡Listo! Se cargaron <strong>198</strong> productos.</div>
+      <div id="upload-status" style="display: block; margin-top: 14px; padding: 12px; border-radius: 8px; font-size: 13px; background: rgba(0, 230, 118, 0.1); border: 1px solid var(--green); color: var(--green);">✅ ¡Listo! Se cargaron <strong>196</strong> productos.</div>
     </div>
     <div class="modal-actions">
       <button class="btn-secondary" style="width:auto;padding:9px 20px" onclick="resetUploadModal()">Cancelar</button>
@@ -3025,7 +3076,7 @@ tbody td{padding:8px 13px;white-space:nowrap;max-width:220px;overflow:hidden;tex
 
 <script>
 // ══════════════════ DATA & APP ══════════════════
-const RAW = [{"NOMBRE DEL PRODUCTO":"43 BCAA + GLUTAMINA","CATEGORIA":"AMINOACIDOS/GLUTAMINAS","MARCA":"43 SUPPLEMENTS","PRECIO VENTA":390,"MAYOREO 3 MIL":255,"MAYOREO 6 MIL":237,"MEDIO MAYOREO":325,"CLIENTES FORÁNEOS":290},{"NOMBRE DEL PRODUCTO":"43 ZERO 2.4 KG","CATEGORIA":"PROTEINAS","MARCA":"43 SUPPLEMENTS","PRECIO VENTA":600,"MAYOREO 3 MIL":475,"MAYOREO 6 MIL":460,"MEDIO MAYOREO":525,"CLIENTES FORÁNEOS":500},{"NOMBRE DEL PRODUCTO":"43 ZERO 6 KG","CATEGORIA":"PROTEINAS","MARCA":"43 SUPPLEMENTS","PRECIO VENTA":990,"MAYOREO 3 MIL":785,"MAYOREO 6 MIL":762,"MEDIO MAYOREO":915,"CLIENTES FORÁNEOS":850},{"NOMBRE DEL PRODUCTO":"ACXION","CATEGORIA":"FARMACOLOGIA","MARCA":"IFA","PRECIO VENTA":490,"MAYOREO 3 MIL":340,"MAYOREO 6 MIL":325,"MEDIO MAYOREO":390,"CLIENTES FORÁNEOS":365},{"NOMBRE DEL PRODUCTO":"AMINO ENERGY ON CHICO","CATEGORIA":"AMINOACIDOS","MARCA":"ON","PRECIO VENTA":480,"MAYOREO 3 MIL":335,"MAYOREO 6 MIL":320,"MEDIO MAYOREO":385,"CLIENTES FORÁNEOS":360},{"NOMBRE DEL PRODUCTO":"AMINO ENERGY ON GRANDE","CATEGORIA":"AMINOACIDOS","MARCA":"ON","PRECIO VENTA":820,"MAYOREO 3 MIL":643,"MAYOREO 6 MIL":620,"MEDIO MAYOREO":773,"CLIENTES FORÁNEOS":708},{"NOMBRE DEL PRODUCTO":"AMINO X CHICO","CATEGORIA":"AMINOACIDOS","MARCA":"BSN","PRECIO VENTA":480,"MAYOREO 3 MIL":331,"MAYOREO 6 MIL":316,"MEDIO MAYOREO":381,"CLIENTES FORÁNEOS":356},{"NOMBRE DEL PRODUCTO":"AMINO X GRANDE","CATEGORIA":"AMINOACIDOS","MARCA":"BSN","PRECIO VENTA":850,"MAYOREO 3 MIL":677,"MAYOREO 6 MIL":657,"MEDIO MAYOREO":787,"CLIENTES FORÁNEOS":732},{"NOMBRE DEL PRODUCTO":"AMINOJECT","CATEGORIA":"AMINOACIDOS","MARCA":"EVOGEN","PRECIO VENTA":630,"MAYOREO 3 MIL":508,"MAYOREO 6 MIL":493,"MEDIO MAYOREO":558,"CLIENTES FORÁNEOS":533},{"NOMBRE DEL PRODUCTO":"ANGUS MASS","CATEGORIA":"GANADORES DE PESO","MARCA":"BHP","PRECIO VENTA":740,"MAYOREO 3 MIL":629,"MAYOREO 6 MIL":614,"MEDIO MAYOREO":679,"CLIENTES FORÁNEOS":654},{"NOMBRE DEL PRODUCTO":"ANIMAL FLEX","CATEGORIA":"COLAGENOS","MARCA":"UNIVERSAL","PRECIO VENTA":600,"MAYOREO 3 MIL":508,"MAYOREO 6 MIL":496,"MEDIO MAYOREO":548,"CLIENTES FORÁNEOS":528},{"NOMBRE DEL PRODUCTO":"ANIMAL PACK","CATEGORIA":"VITAMINAS","MARCA":"UNIVERSAL","PRECIO VENTA":770,"MAYOREO 3 MIL":621,"MAYOREO 6 MIL":603,"MEDIO MAYOREO":691,"CLIENTES FORÁNEOS":656},{"NOMBRE DEL PRODUCTO":"B NOVA BCAA","CATEGORIA":"AMINOACIDOS","MARCA":"B NOVA","PRECIO VENTA":350,"MAYOREO 3 MIL":245,"MAYOREO 6 MIL":230,"MEDIO MAYOREO":295,"CLIENTES FORÁNEOS":270},{"NOMBRE DEL PRODUCTO":"B NOVA CREATINA CHICA","CATEGORIA":"CREATINAS","MARCA":"B NOVA","PRECIO VENTA":330,"MAYOREO 3 MIL":235,"MAYOREO 6 MIL":223,"MEDIO MAYOREO":275,"CLIENTES FORÁNEOS":255},{"NOMBRE DEL PRODUCTO":"B NOVA CREATINA GRANDE","CATEGORIA":"CREATINAS","MARCA":"B NOVA","PRECIO VENTA":400,"MAYOREO 3 MIL":290,"MAYOREO 6 MIL":275,"MEDIO MAYOREO":340,"CLIENTES FORÁNEOS":315},{"NOMBRE DEL PRODUCTO":"B NOVA ISO FEMME 1 KG","CATEGORIA":"PROTEINAS","MARCA":"B NOVA","PRECIO VENTA":350,"MAYOREO 3 MIL":260,"MAYOREO 6 MIL":248,"MEDIO MAYOREO":300,"CLIENTES FORÁNEOS":280},{"NOMBRE DEL PRODUCTO":"B NOVA PEPTONAS","CATEGORIA":"OTROS","MARCA":"B NOVA","PRECIO VENTA":480,"MAYOREO 3 MIL":335,"MAYOREO 6 MIL":317,"MEDIO MAYOREO":405,"CLIENTES FORÁNEOS":370},{"NOMBRE DEL PRODUCTO":"B NOVA ZERO 1 KG","CATEGORIA":"PROTEINAS","MARCA":"B NOVA","PRECIO VENTA":330,"MAYOREO 3 MIL":245,"MAYOREO 6 MIL":233,"MEDIO MAYOREO":285,"CLIENTES FORÁNEOS":265},{"NOMBRE DEL PRODUCTO":"B NOVA ZERO 4.5 KG","CATEGORIA":"PROTEINAS","MARCA":"B NOVA","PRECIO VENTA":690,"MAYOREO 3 MIL":585,"MAYOREO 6 MIL":573,"MEDIO MAYOREO":625,"CLIENTES FORÁNEOS":605},{"NOMBRE DEL PRODUCTO":"BCAA MUTANT","CATEGORIA":"AMINOACIDOS","MARCA":"MUTANT","PRECIO VENTA":400,"MAYOREO 3 MIL":274,"MAYOREO 6 MIL":259,"MEDIO MAYOREO":324,"CLIENTES FORÁNEOS":299},{"NOMBRE DEL PRODUCTO":"BCAA SUPREME","CATEGORIA":"AMINOACIDOS","MARCA":"USP LABS","PRECIO VENTA":470,"MAYOREO 3 MIL":348,"MAYOREO 6 MIL":333,"MEDIO MAYOREO":398,"CLIENTES FORÁNEOS":373},{"NOMBRE DEL PRODUCTO":"BETA ALANINA GAT","CATEGORIA":"PRE ENTRENOS","MARCA":"GAT SPORT","PRECIO VENTA":490,"MAYOREO 3 MIL":372,"MAYOREO 6 MIL":357,"MEDIO MAYOREO":422,"CLIENTES FORÁNEOS":397},{"NOMBRE DEL PRODUCTO":"BHP WHEY ULTRA","CATEGORIA":"PROTEINAS","MARCA":"BHP","PRECIO VENTA":840,"MAYOREO 3 MIL":755,"MAYOREO 6 MIL":743,"MEDIO MAYOREO":795,"CLIENTES FORÁNEOS":775},{"NOMBRE DEL PRODUCTO":"BLACK SPIDER","CATEGORIA":"QUEMADORES","MARCA":"CLOMA PHARMA","PRECIO VENTA":500,"MAYOREO 3 MIL":333,"MAYOREO 6 MIL":315,"MEDIO MAYOREO":403,"CLIENTES FORÁNEOS":368},{"NOMBRE DEL PRODUCTO":"BLIFE 3 MAG BLEND","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":290,"MAYOREO 3 MIL":189,"MAYOREO 6 MIL":177,"MEDIO MAYOREO":229,"CLIENTES FORÁNEOS":209},{"NOMBRE DEL PRODUCTO":"BLIFE 80 BILLION PROBIOTIC","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":400,"MAYOREO 3 MIL":312,"MAYOREO 6 MIL":300,"MEDIO MAYOREO":352,"CLIENTES FORÁNEOS":332},{"NOMBRE DEL PRODUCTO":"BLIFE ACIDO ALFA LIPOICO","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":480,"MAYOREO 3 MIL":380,"MAYOREO 6 MIL":368,"MEDIO MAYOREO":420,"CLIENTES FORÁNEOS":400},{"NOMBRE DEL PRODUCTO":"BLIFE ASHWAGANDA","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":390,"MAYOREO 3 MIL":288,"MAYOREO 6 MIL":273,"MEDIO MAYOREO":338,"CLIENTES FORÁNEOS":313},{"NOMBRE DEL PRODUCTO":"BLIFE B YEAST BLEND","CATEGORIA":"VITAMINAS","MARCA":"BLIFE","PRECIO VENTA":290,"MAYOREO 3 MIL":189,"MAYOREO 6 MIL":177,"MEDIO MAYOREO":229,"CLIENTES FORÁNEOS":209},{"NOMBRE DEL PRODUCTO":"BLIFE BERBERINA","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":340,"MAYOREO 3 MIL":244,"MAYOREO 6 MIL":232,"MEDIO MAYOREO":284,"CLIENTES FORÁNEOS":264},{"NOMBRE DEL PRODUCTO":"BLIFE BOTELLA CON FUNDA","CATEGORIA":"ACCESORIOS","MARCA":"BLIFE","PRECIO VENTA":390,"MAYOREO 3 MIL":313,"MAYOREO 6 MIL":301,"MEDIO MAYOREO":353,"CLIENTES FORÁNEOS":333},{"NOMBRE DEL PRODUCTO":"BLIFE BOTELLA CON TOALLA","CATEGORIA":"ACCESORIOS","MARCA":"BLIFE","PRECIO VENTA":260,"MAYOREO 3 MIL":176,"MAYOREO 6 MIL":164,"MEDIO MAYOREO":216,"CLIENTES FORÁNEOS":196},{"NOMBRE DEL PRODUCTO":"BLIFE BOTELLA TÉRMICA","CATEGORIA":"ACCESORIOS","MARCA":"BLIFE","PRECIO VENTA":320,"MAYOREO 3 MIL":243,"MAYOREO 6 MIL":231,"MEDIO MAYOREO":283,"CLIENTES FORÁNEOS":263},{"NOMBRE DEL PRODUCTO":"BLIFE CALCIO+D3","CATEGORIA":"VITAMINAS","MARCA":"BLIFE","PRECIO VENTA":370,"MAYOREO 3 MIL":294,"MAYOREO 6 MIL":282,"MEDIO MAYOREO":334,"CLIENTES FORÁNEOS":314},{"NOMBRE DEL PRODUCTO":"BLIFE CITRATO DE MAGNESIO CHICO","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":320,"MAYOREO 3 MIL":215,"MAYOREO 6 MIL":200,"MEDIO MAYOREO":265,"CLIENTES FORÁNEOS":240},{"NOMBRE DEL PRODUCTO":"BLIFE CITRATO DE MAGNESIO GRANDE","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":440,"MAYOREO 3 MIL":322,"MAYOREO 6 MIL":307,"MEDIO MAYOREO":372,"CLIENTES FORÁNEOS":347},{"NOMBRE DEL PRODUCTO":"BLIFE CITRATO DE POTASIO","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":280,"MAYOREO 3 MIL":197,"MAYOREO 6 MIL":185,"MEDIO MAYOREO":237,"CLIENTES FORÁNEOS":217},{"NOMBRE DEL PRODUCTO":"BLIFE COLAGENO BIO","CATEGORIA":"COLAGENOS","MARCA":"BLIFE","PRECIO VENTA":290,"MAYOREO 3 MIL":197,"MAYOREO 6 MIL":185,"MEDIO MAYOREO":237,"CLIENTES FORÁNEOS":217},{"NOMBRE DEL PRODUCTO":"BLIFE COLAGENO BLEND","CATEGORIA":"COLAGENOS","MARCA":"BLIFE","PRECIO VENTA":290,"MAYOREO 3 MIL":220,"MAYOREO 6 MIL":208,"MEDIO MAYOREO":260,"CLIENTES FORÁNEOS":240},{"NOMBRE DEL PRODUCTO":"BLIFE CREATINA","CATEGORIA":"CREATINAS","MARCA":"BLIFE","PRECIO VENTA":490,"MAYOREO 3 MIL":389,"MAYOREO 6 MIL":377,"MEDIO MAYOREO":429,"CLIENTES FORÁNEOS":409},{"NOMBRE DEL PRODUCTO":"BLIFE ELECTRO BLEND + CREATINA","CATEGORIA":"CREATINAS","MARCA":"BLIFE","PRECIO VENTA":470,"MAYOREO 3 MIL":380,"MAYOREO 6 MIL":368,"MEDIO MAYOREO":420,"CLIENTES FORÁNEOS":400},{"NOMBRE DEL PRODUCTO":"BLIFE GLICINATO DE MAGNESIO","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":300,"MAYOREO 3 MIL":210,"MAYOREO 6 MIL":198,"MEDIO MAYOREO":250,"CLIENTES FORÁNEOS":230},{"NOMBRE DEL PRODUCTO":"BLIFE JOINT BLEND","CATEGORIA":"COLAGENOS","MARCA":"BLIFE","PRECIO VENTA":340,"MAYOREO 3 MIL":244,"MAYOREO 6 MIL":232,"MEDIO MAYOREO":284,"CLIENTES FORÁNEOS":264},{"NOMBRE DEL PRODUCTO":"BLIFE KIT TOALLAS","CATEGORIA":"ACCESORIOS","MARCA":"BLIFE","PRECIO VENTA":280,"MAYOREO 3 MIL":189,"MAYOREO 6 MIL":177,"MEDIO MAYOREO":229,"CLIENTES FORÁNEOS":209},{"NOMBRE DEL PRODUCTO":"BLIFE MACA BLEND","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":270,"MAYOREO 3 MIL":189,"MAYOREO 6 MIL":177,"MEDIO MAYOREO":229,"CLIENTES FORÁNEOS":209},{"NOMBRE DEL PRODUCTO":"BLIFE MENS BLEND","CATEGORIA":"VITAMINAS","MARCA":"BLIFE","PRECIO VENTA":290,"MAYOREO 3 MIL":189,"MAYOREO 6 MIL":177,"MEDIO MAYOREO":229,"CLIENTES FORÁNEOS":209},{"NOMBRE DEL PRODUCTO":"BLIFE MENS T PLATINUM","CATEGORIA":"PRECURSORES","MARCA":"BLIFE","PRECIO VENTA":490,"MAYOREO 3 MIL":380,"MAYOREO 6 MIL":368,"MEDIO MAYOREO":420,"CLIENTES FORÁNEOS":400},{"NOMBRE DEL PRODUCTO":"BLIFE MYO INOSITOL","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":290,"MAYOREO 3 MIL":196,"MAYOREO 6 MIL":184,"MEDIO MAYOREO":236,"CLIENTES FORÁNEOS":216},{"NOMBRE DEL PRODUCTO":"BLIFE OMEGA 3 CHICO","CATEGORIA":"VITAMINAS","MARCA":"BLIFE","PRECIO VENTA":330,"MAYOREO 3 MIL":220,"MAYOREO 6 MIL":205,"MEDIO MAYOREO":270,"CLIENTES FORÁNEOS":245},{"NOMBRE DEL PRODUCTO":"BLIFE OMEGA 3 GRANDE","CATEGORIA":"VITAMINAS","MARCA":"BLIFE","PRECIO VENTA":480,"MAYOREO 3 MIL":356,"MAYOREO 6 MIL":341,"MEDIO MAYOREO":406,"CLIENTES FORÁNEOS":381},{"NOMBRE DEL PRODUCTO":"BLIFE RESVERATROL","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":320,"MAYOREO 3 MIL":235,"MAYOREO 6 MIL":223,"MEDIO MAYOREO":275,"CLIENTES FORÁNEOS":255},{"NOMBRE DEL PRODUCTO":"BLIFE TRIBULUS","CATEGORIA":"PRECURSORES","MARCA":"BLIFE","PRECIO VENTA":350,"MAYOREO 3 MIL":278,"MAYOREO 6 MIL":266,"MEDIO MAYOREO":318,"CLIENTES FORÁNEOS":298},{"NOMBRE DEL PRODUCTO":"BLIFE VITAMINA E+BIOTINA","CATEGORIA":"VITAMINAS","MARCA":"BLIFE","PRECIO VENTA":360,"MAYOREO 3 MIL":278,"MAYOREO 6 MIL":266,"MEDIO MAYOREO":318,"CLIENTES FORÁNEOS":298},{"NOMBRE DEL PRODUCTO":"BLIFE WOMENS BLEND","CATEGORIA":"VITAMINAS","MARCA":"BLIFE","PRECIO VENTA":300,"MAYOREO 3 MIL":199,"MAYOREO 6 MIL":184,"MEDIO MAYOREO":249,"CLIENTES FORÁNEOS":224},{"NOMBRE DEL PRODUCTO":"C4 ORIGINAL CHICO","CATEGORIA":"PRE ENTRENOS","MARCA":"CELLUCOR","PRECIO VENTA":470,"MAYOREO 3 MIL":353,"MAYOREO 6 MIL":338,"MEDIO MAYOREO":403,"CLIENTES FORÁNEOS":378},{"NOMBRE DEL PRODUCTO":"C4 ORIGINAL GRANDE","CATEGORIA":"PRE ENTRENOS","MARCA":"CELLUCOR","PRECIO VENTA":640,"MAYOREO 3 MIL":505,"MAYOREO 6 MIL":490,"MEDIO MAYOREO":555,"CLIENTES FORÁNEOS":530},{"NOMBRE DEL PRODUCTO":"CAFEINA GAT","CATEGORIA":"PRE ENTRENOS","MARCA":"GAT SPORT","PRECIO VENTA":280,"MAYOREO 3 MIL":170,"MAYOREO 6 MIL":158,"MEDIO MAYOREO":210,"CLIENTES FORÁNEOS":190},{"NOMBRE DEL PRODUCTO":"CAFEINA MUTANT","CATEGORIA":"PRE ENTRENOS","MARCA":"MUTANT","PRECIO VENTA":300,"MAYOREO 3 MIL":195,"MAYOREO 6 MIL":180,"MEDIO MAYOREO":245,"CLIENTES FORÁNEOS":220},{"NOMBRE DEL PRODUCTO":"CARBOTEIN","CATEGORIA":"AMINOACIDOS","MARCA":"GAT SPORT","PRECIO VENTA":640,"MAYOREO 3 MIL":529,"MAYOREO 6 MIL":514,"MEDIO MAYOREO":579,"CLIENTES FORÁNEOS":554},{"NOMBRE DEL PRODUCTO":"CARNIVOR BOTE","CATEGORIA":"PROTEINAS","MARCA":"MUSCLEMEDS","PRECIO VENTA":980,"MAYOREO 3 MIL":871,"MAYOREO 6 MIL":856,"MEDIO MAYOREO":921,"CLIENTES FORÁNEOS":896},{"NOMBRE DEL PRODUCTO":"CARNIVOR MASS","CATEGORIA":"GANADORES DE PESO","MARCA":"MUSCLEMEDS","PRECIO VENTA":870,"MAYOREO 3 MIL":749,"MAYOREO 6 MIL":734,"MEDIO MAYOREO":799,"CLIENTES FORÁNEOS":774},{"NOMBRE DEL PRODUCTO":"CBUM ESSENTIAL CHICO","CATEGORIA":"PRE ENTRENOS","MARCA":"RAW","PRECIO VENTA":490,"MAYOREO 3 MIL":375,"MAYOREO 6 MIL":360,"MEDIO MAYOREO":425,"CLIENTES FORÁNEOS":400},{"NOMBRE DEL PRODUCTO":"CBUM ITHOLATE CHICA","CATEGORIA":"PROTEINAS","MARCA":"RAW","PRECIO VENTA":840,"MAYOREO 3 MIL":749,"MAYOREO 6 MIL":737,"MEDIO MAYOREO":789,"CLIENTES FORÁNEOS":769},{"NOMBRE DEL PRODUCTO":"CBUM ITHOLATE GRANDE","CATEGORIA":"PROTEINAS","MARCA":"RAW","PRECIO VENTA":1640,"MAYOREO 3 MIL":1509,"MAYOREO 6 MIL":1494,"MEDIO MAYOREO":1559,"CLIENTES FORÁNEOS":1534},{"NOMBRE DEL PRODUCTO":"CELL TECH 3 LBS","CATEGORIA":"CREATINAS","MARCA":"MUSCLETECH","PRECIO VENTA":590,"MAYOREO 3 MIL":478,"MAYOREO 6 MIL":463,"MEDIO MAYOREO":528,"CLIENTES FORÁNEOS":503},{"NOMBRE DEL PRODUCTO":"CELL TECH 6LBS","CATEGORIA":"CREATINAS","MARCA":"MUSCLETECH","PRECIO VENTA":850,"MAYOREO 3 MIL":699,"MAYOREO 6 MIL":681,"MEDIO MAYOREO":769,"CLIENTES FORÁNEOS":734},{"NOMBRE DEL PRODUCTO":"CELL TECH CREACTOR","CATEGORIA":"CREATINAS","MARCA":"MUSCLETECH","PRECIO VENTA":500,"MAYOREO 3 MIL":374,"MAYOREO 6 MIL":359,"MEDIO MAYOREO":424,"CLIENTES FORÁNEOS":399},{"NOMBRE DEL PRODUCTO":"CINTURON","CATEGORIA":"ACCESORIOS","MARCA":"-","PRECIO VENTA":500,"MAYOREO 3 MIL":390,"MAYOREO 6 MIL":375,"MEDIO MAYOREO":440,"CLIENTES FORÁNEOS":415},{"NOMBRE DEL PRODUCTO":"CITRULINA INSANE","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":320,"MAYOREO 3 MIL":218,"MAYOREO 6 MIL":203,"MEDIO MAYOREO":268,"CLIENTES FORÁNEOS":243},{"NOMBRE DEL PRODUCTO":"CLA 1250 GAT","CATEGORIA":"QUEMADORES","MARCA":"GAT SPORT","PRECIO VENTA":350,"MAYOREO 3 MIL":242,"MAYOREO 6 MIL":230,"MEDIO MAYOREO":282,"CLIENTES FORÁNEOS":262},{"NOMBRE DEL PRODUCTO":"CLA+CARNITINA BPI","CATEGORIA":"QUEMADORES","MARCA":"BPI","PRECIO VENTA":450,"MAYOREO 3 MIL":313,"MAYOREO 6 MIL":295,"MEDIO MAYOREO":383,"CLIENTES FORÁNEOS":348},{"NOMBRE DEL PRODUCTO":"COLÁGENO HIDROLIZADO SHE FIT","CATEGORIA":"COLAGENOS","MARCA":"BHP","PRECIO VENTA":440,"MAYOREO 3 MIL":335,"MAYOREO 6 MIL":320,"MEDIO MAYOREO":385,"CLIENTES FORÁNEOS":360},{"NOMBRE DEL PRODUCTO":"COLÁGENO META","CATEGORIA":"COLAGENOS","MARCA":"META","PRECIO VENTA":440,"MAYOREO 3 MIL":316,"MAYOREO 6 MIL":301,"MEDIO MAYOREO":366,"CLIENTES FORÁNEOS":341},{"NOMBRE DEL PRODUCTO":"CREATINA BIRDMAN","CATEGORIA":"CREATINAS","MARCA":"BIRDMAN","PRECIO VENTA":590,"MAYOREO 3 MIL":443,"MAYOREO 6 MIL":428,"MEDIO MAYOREO":493,"CLIENTES FORÁNEOS":468},{"NOMBRE DEL PRODUCTO":"CREATINA CELLUCOR","CATEGORIA":"CREATINAS","MARCA":"CELLUCOR","PRECIO VENTA":560,"MAYOREO 3 MIL":411,"MAYOREO 6 MIL":391,"MEDIO MAYOREO":521,"CLIENTES FORÁNEOS":466},{"NOMBRE DEL PRODUCTO":"CREATINA CREAKON CX8","CATEGORIA":"CREATINAS","MARCA":"MUTANT","PRECIO VENTA":400,"MAYOREO 3 MIL":297,"MAYOREO 6 MIL":282,"MEDIO MAYOREO":347,"CLIENTES FORÁNEOS":322},{"NOMBRE DEL PRODUCTO":"CREATINA DRAGON CHICA","CATEGORIA":"CREATINAS","MARCA":"DRAGON PHARMA","PRECIO VENTA":460,"MAYOREO 3 MIL":348,"MAYOREO 6 MIL":333,"MEDIO MAYOREO":398,"CLIENTES FORÁNEOS":373},{"NOMBRE DEL PRODUCTO":"CREATINA DRAGON GRANDE","CATEGORIA":"CREATINAS","MARCA":"DRAGON PHARMA","PRECIO VENTA":720,"MAYOREO 3 MIL":580,"MAYOREO 6 MIL":565,"MEDIO MAYOREO":630,"CLIENTES FORÁNEOS":605},{"NOMBRE DEL PRODUCTO":"CREATINA ELECTROLYTE","CATEGORIA":"CREATINAS","MARCA":"BIRDMAN","PRECIO VENTA":500,"MAYOREO 3 MIL":390,"MAYOREO 6 MIL":375,"MEDIO MAYOREO":440,"CLIENTES FORÁNEOS":415},{"NOMBRE DEL PRODUCTO":"CREATINA GAT CHICA","CATEGORIA":"CREATINAS","MARCA":"GAT SPORT","PRECIO VENTA":620,"MAYOREO 3 MIL":400,"MAYOREO 6 MIL":377,"MEDIO MAYOREO":530,"CLIENTES FORÁNEOS":465},{"NOMBRE DEL PRODUCTO":"CREATINA GAT GRANDE","CATEGORIA":"CREATINAS","MARCA":"GAT SPORT","PRECIO VENTA":990,"MAYOREO 3 MIL":632,"MAYOREO 6 MIL":609,"MEDIO MAYOREO":762,"CLIENTES FORÁNEOS":697},{"NOMBRE DEL PRODUCTO":"CREATINA HI TECH CHICA","CATEGORIA":"CREATINAS","MARCA":"HTP","PRECIO VENTA":560,"MAYOREO 3 MIL":401,"MAYOREO 6 MIL":381,"MEDIO MAYOREO":511,"CLIENTES FORÁNEOS":456},{"NOMBRE DEL PRODUCTO":"CREATINA HI TECH GRANDE","CATEGORIA":"CREATINAS","MARCA":"HTP","PRECIO VENTA":950,"MAYOREO 3 MIL":784,"MAYOREO 6 MIL":766,"MEDIO MAYOREO":854,"CLIENTES FORÁNEOS":819},{"NOMBRE DEL PRODUCTO":"CREATINA INSANE","CATEGORIA":"CREATINAS","MARCA":"INSANE","PRECIO VENTA":460,"MAYOREO 3 MIL":333,"MAYOREO 6 MIL":318,"MEDIO MAYOREO":383,"CLIENTES FORÁNEOS":358},{"NOMBRE DEL PRODUCTO":"CREATINA META","CATEGORIA":"CREATINAS","MARCA":"META","PRECIO VENTA":500,"MAYOREO 3 MIL":355,"MAYOREO 6 MIL":337,"MEDIO MAYOREO":425,"CLIENTES FORÁNEOS":390},{"NOMBRE DEL PRODUCTO":"CREATINA NUTREX CHICA","CATEGORIA":"CREATINAS","MARCA":"NUTREX","PRECIO VENTA":500,"MAYOREO 3 MIL":335,"MAYOREO 6 MIL":315,"MEDIO MAYOREO":445,"CLIENTES FORÁNEOS":390},{"NOMBRE DEL PRODUCTO":"CREATINA NUTREX GRANDE","CATEGORIA":"CREATINAS","MARCA":"NUTREX","PRECIO VENTA":740,"MAYOREO 3 MIL":531,"MAYOREO 6 MIL":508,"MEDIO MAYOREO":661,"CLIENTES FORÁNEOS":596},{"NOMBRE DEL PRODUCTO":"CREATINA ON","CATEGORIA":"CREATINAS","MARCA":"ON","PRECIO VENTA":590,"MAYOREO 3 MIL":361,"MAYOREO 6 MIL":338,"MEDIO MAYOREO":491,"CLIENTES FORÁNEOS":426},{"NOMBRE DEL PRODUCTO":"CREATINA PLATINUM","CATEGORIA":"CREATINAS","MARCA":"MUSCLETECH","PRECIO VENTA":650,"MAYOREO 3 MIL":489,"MAYOREO 6 MIL":469,"MEDIO MAYOREO":599,"CLIENTES FORÁNEOS":544},{"NOMBRE DEL PRODUCTO":"CREATINA RC CHICA","CATEGORIA":"CREATINAS","MARCA":"RONNIE COLEMAN","PRECIO VENTA":460,"MAYOREO 3 MIL":297,"MAYOREO 6 MIL":279,"MEDIO MAYOREO":367,"CLIENTES FORÁNEOS":332},{"NOMBRE DEL PRODUCTO":"CREATINA RC GRANDE","CATEGORIA":"CREATINAS","MARCA":"RONNIE COLEMAN","PRECIO VENTA":890,"MAYOREO 3 MIL":585,"MAYOREO 6 MIL":562,"MEDIO MAYOREO":715,"CLIENTES FORÁNEOS":650},{"NOMBRE DEL PRODUCTO":"CREATINA ULTRA BHP 300 GRS","CATEGORIA":"CREATINAS","MARCA":"BHP","PRECIO VENTA":370,"MAYOREO 3 MIL":214,"MAYOREO 6 MIL":196,"MEDIO MAYOREO":284,"CLIENTES FORÁNEOS":249},{"NOMBRE DEL PRODUCTO":"CREATINA ULTRA BHP 500 GRS","CATEGORIA":"CREATINAS","MARCA":"BHP","PRECIO VENTA":420,"MAYOREO 3 MIL":249,"MAYOREO 6 MIL":231,"MEDIO MAYOREO":319,"CLIENTES FORÁNEOS":284},{"NOMBRE DEL PRODUCTO":"DEFIT CREATINA CHICA","CATEGORIA":"CREATINAS","MARCA":"DEFIT","PRECIO VENTA":340,"MAYOREO 3 MIL":220,"MAYOREO 6 MIL":205,"MEDIO MAYOREO":270,"CLIENTES FORÁNEOS":245},{"NOMBRE DEL PRODUCTO":"DEFIT CREATINA GRANDE","CATEGORIA":"CREATINAS","MARCA":"DEFIT","PRECIO VENTA":430,"MAYOREO 3 MIL":295,"MAYOREO 6 MIL":280,"MEDIO MAYOREO":345,"CLIENTES FORÁNEOS":320},{"NOMBRE DEL PRODUCTO":"DEFIT FIT FEMME","CATEGORIA":"PROTEINAS","MARCA":"DEFIT","PRECIO VENTA":350,"MAYOREO 3 MIL":205,"MAYOREO 6 MIL":190,"MEDIO MAYOREO":255,"CLIENTES FORÁNEOS":230},{"NOMBRE DEL PRODUCTO":"DEFIT ISOLATE WHEY CHICA","CATEGORIA":"PROTEINAS","MARCA":"DEFIT","PRECIO VENTA":330,"MAYOREO 3 MIL":205,"MAYOREO 6 MIL":190,"MEDIO MAYOREO":255,"CLIENTES FORÁNEOS":230},{"NOMBRE DEL PRODUCTO":"DEFIT ISOLATE WHEY GRANDE","CATEGORIA":"PROTEINAS","MARCA":"DEFIT","PRECIO VENTA":620,"MAYOREO 3 MIL":445,"MAYOREO 6 MIL":425,"MEDIO MAYOREO":555,"CLIENTES FORÁNEOS":500},{"NOMBRE DEL PRODUCTO":"DEFIT PEPTONAS","CATEGORIA":"OTROS","MARCA":"DEFIT","PRECIO VENTA":450,"MAYOREO 3 MIL":285,"MAYOREO 6 MIL":265,"MEDIO MAYOREO":395,"CLIENTES FORÁNEOS":340},{"NOMBRE DEL PRODUCTO":"DEMON BCAA","CATEGORIA":"AMINOACIDOS","MARCA":"INSANE","PRECIO VENTA":490,"MAYOREO 3 MIL":348,"MAYOREO 6 MIL":330,"MEDIO MAYOREO":418,"CLIENTES FORÁNEOS":383},{"NOMBRE DEL PRODUCTO":"DEMON DUST","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":430,"MAYOREO 3 MIL":289,"MAYOREO 6 MIL":274,"MEDIO MAYOREO":339,"CLIENTES FORÁNEOS":314},{"NOMBRE DEL PRODUCTO":"ELITE WHEY 5 LBS","CATEGORIA":"PROTEINAS","MARCA":"DYMATIZE","PRECIO VENTA":1340,"MAYOREO 3 MIL":1206,"MAYOREO 6 MIL":1191,"MEDIO MAYOREO":1256,"CLIENTES FORÁNEOS":1231},{"NOMBRE DEL PRODUCTO":"EVP 3D","CATEGORIA":"PRE ENTRENOS","MARCA":"EVOGEN","PRECIO VENTA":680,"MAYOREO 3 MIL":538,"MAYOREO 6 MIL":520,"MEDIO MAYOREO":608,"CLIENTES FORÁNEOS":573},{"NOMBRE DEL PRODUCTO":"EVP XTREME","CATEGORIA":"PRE ENTRENOS","MARCA":"EVOGEN","PRECIO VENTA":680,"MAYOREO 3 MIL":606,"MAYOREO 6 MIL":594,"MEDIO MAYOREO":646,"CLIENTES FORÁNEOS":626},{"NOMBRE DEL PRODUCTO":"FALCON PERFORMANCE","CATEGORIA":"PROTEINAS","MARCA":"BIRDMAN","PRECIO VENTA":730,"MAYOREO 3 MIL":601,"MAYOREO 6 MIL":586,"MEDIO MAYOREO":651,"CLIENTES FORÁNEOS":626},{"NOMBRE DEL PRODUCTO":"FARMACOLOGIA ROTTERDAM","CATEGORIA":"FARMACOLOGIA","MARCA":"ROTTERDAM","PRECIO VENTA":600,"MAYOREO 3 MIL":450,"MAYOREO 6 MIL":435,"MEDIO MAYOREO":500,"CLIENTES FORÁNEOS":475},{"NOMBRE DEL PRODUCTO":"FARMACOLOGIA SYNTEX LABS","CATEGORIA":"FARMACOLOGIA","MARCA":"SYNTEX LABS","PRECIO VENTA":600,"MAYOREO 3 MIL":420,"MAYOREO 6 MIL":402,"MEDIO MAYOREO":490,"CLIENTES FORÁNEOS":455},{"NOMBRE DEL PRODUCTO":"FARMACOLOGIA XT LABS","CATEGORIA":"FARMACOLOGIA","MARCA":"XT LABS","PRECIO VENTA":600,"MAYOREO 3 MIL":450,"MAYOREO 6 MIL":435,"MEDIO MAYOREO":500,"CLIENTES FORÁNEOS":475},{"NOMBRE DEL PRODUCTO":"FITMINGO","CATEGORIA":"PROTEINAS","MARCA":"BIRDMAN","PRECIO VENTA":980,"MAYOREO 3 MIL":851,"MAYOREO 6 MIL":836,"MEDIO MAYOREO":901,"CLIENTES FORÁNEOS":876},{"NOMBRE DEL PRODUCTO":"FLEXX EAAS","CATEGORIA":"AMINOACIDOS","MARCA":"GAT SPORT","PRECIO VENTA":450,"MAYOREO 3 MIL":375,"MAYOREO 6 MIL":363,"MEDIO MAYOREO":415,"CLIENTES FORÁNEOS":395},{"NOMBRE DEL PRODUCTO":"GAINER ULTRA","CATEGORIA":"GANADORES DE PESO","MARCA":"BHP","PRECIO VENTA":720,"MAYOREO 3 MIL":639,"MAYOREO 6 MIL":627,"MEDIO MAYOREO":679,"CLIENTES FORÁNEOS":659},{"NOMBRE DEL PRODUCTO":"GHOST LEGEND PWO","CATEGORIA":"PRE ENTRENOS","MARCA":"GHOST","PRECIO VENTA":660,"MAYOREO 3 MIL":580,"MAYOREO 6 MIL":568,"MEDIO MAYOREO":620,"CLIENTES FORÁNEOS":600},{"NOMBRE DEL PRODUCTO":"GHOST WHEY 2 LBS","CATEGORIA":"PROTEINAS","MARCA":"GHOST","PRECIO VENTA":800,"MAYOREO 3 MIL":692,"MAYOREO 6 MIL":677,"MEDIO MAYOREO":742,"CLIENTES FORÁNEOS":717},{"NOMBRE DEL PRODUCTO":"GLUTAMINA PURE CHICA","CATEGORIA":"GLUTAMINAS","MARCA":"NUTREX","PRECIO VENTA":320,"MAYOREO 3 MIL":246,"MAYOREO 6 MIL":234,"MEDIO MAYOREO":286,"CLIENTES FORÁNEOS":266},{"NOMBRE DEL PRODUCTO":"GLUTAMINA PURE GRANDE","CATEGORIA":"GLUTAMINAS","MARCA":"NUTREX","PRECIO VENTA":600,"MAYOREO 3 MIL":518,"MAYOREO 6 MIL":506,"MEDIO MAYOREO":558,"CLIENTES FORÁNEOS":538},{"NOMBRE DEL PRODUCTO":"GLUTAMINA GAT","CATEGORIA":"GLUTAMINAS","MARCA":"GAT SPORT","PRECIO VENTA":390,"MAYOREO 3 MIL":276,"MAYOREO 6 MIL":261,"MEDIO MAYOREO":326,"CLIENTES FORÁNEOS":301},{"NOMBRE DEL PRODUCTO":"GLUTAMINA MUTANT","CATEGORIA":"GLUTAMINAS","MARCA":"MUTANT","PRECIO VENTA":330,"MAYOREO 3 MIL":223,"MAYOREO 6 MIL":211,"MEDIO MAYOREO":263,"CLIENTES FORÁNEOS":243},{"NOMBRE DEL PRODUCTO":"GLUTAMINA PLATINUM","CATEGORIA":"GLUTAMINAS","MARCA":"MUSCLETECH","PRECIO VENTA":420,"MAYOREO 3 MIL":339,"MAYOREO 6 MIL":327,"MEDIO MAYOREO":379,"CLIENTES FORÁNEOS":359},{"NOMBRE DEL PRODUCTO":"GOLD STANDARD 10 LBS","CATEGORIA":"PROTEINAS","MARCA":"ON","PRECIO VENTA":2490,"MAYOREO 3 MIL":2353,"MAYOREO 6 MIL":2338,"MEDIO MAYOREO":2403,"CLIENTES FORÁNEOS":2378},{"NOMBRE DEL PRODUCTO":"GOLD STANDARD 2 LBS","CATEGORIA":"PROTEINAS","MARCA":"ON","PRECIO VENTA":800,"MAYOREO 3 MIL":688,"MAYOREO 6 MIL":673,"MEDIO MAYOREO":738,"CLIENTES FORÁNEOS":713},{"NOMBRE DEL PRODUCTO":"GOLD STANDARD 5 LBS","CATEGORIA":"PROTEINAS","MARCA":"ON","PRECIO VENTA":1460,"MAYOREO 3 MIL":1321,"MAYOREO 6 MIL":1306,"MEDIO MAYOREO":1371,"CLIENTES FORÁNEOS":1346},{"NOMBRE DEL PRODUCTO":"GOLD STANDARD ISOLATE","CATEGORIA":"PROTEINAS","MARCA":"ON","PRECIO VENTA":1620,"MAYOREO 3 MIL":1511,"MAYOREO 6 MIL":1499,"MEDIO MAYOREO":1551,"CLIENTES FORÁNEOS":1531},{"NOMBRE DEL PRODUCTO":"HYDROTEIN","CATEGORIA":"PROTEINAS","MARCA":"ADVANCED NUTRITION","PRECIO VENTA":970,"MAYOREO 3 MIL":870,"MAYOREO 6 MIL":858,"MEDIO MAYOREO":910,"CLIENTES FORÁNEOS":890},{"NOMBRE DEL PRODUCTO":"HYDROXYCUT HARDCORE ELITE","CATEGORIA":"QUEMADORES","MARCA":"MUSCLETECH","PRECIO VENTA":450,"MAYOREO 3 MIL":335,"MAYOREO 6 MIL":320,"MEDIO MAYOREO":385,"CLIENTES FORÁNEOS":360},{"NOMBRE DEL PRODUCTO":"INSANE VEINZ","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":470,"MAYOREO 3 MIL":364,"MAYOREO 6 MIL":352,"MEDIO MAYOREO":404,"CLIENTES FORÁNEOS":384},{"NOMBRE DEL PRODUCTO":"ISOPHORM","CATEGORIA":"PROTEINAS","MARCA":"DRAGON PHARMA","PRECIO VENTA":1650,"MAYOREO 3 MIL":1563,"MAYOREO 6 MIL":1551,"MEDIO MAYOREO":1603,"CLIENTES FORÁNEOS":1583},{"NOMBRE DEL PRODUCTO":"ISO 100 1.3 LBS","CATEGORIA":"PROTEINAS","MARCA":"DYMATIZE","PRECIO VENTA":820,"MAYOREO 3 MIL":684,"MAYOREO 6 MIL":669,"MEDIO MAYOREO":734,"CLIENTES FORÁNEOS":709},{"NOMBRE DEL PRODUCTO":"ISO 100 3 LBS","CATEGORIA":"PROTEINAS","MARCA":"DYMATIZE","PRECIO VENTA":1280,"MAYOREO 3 MIL":1165,"MAYOREO 6 MIL":1150,"MEDIO MAYOREO":1215,"CLIENTES FORÁNEOS":1190},{"NOMBRE DEL PRODUCTO":"ISO 100 5 LBS","CATEGORIA":"PROTEINAS","MARCA":"DYMATIZE","PRECIO VENTA":1850,"MAYOREO 3 MIL":1745,"MAYOREO 6 MIL":1730,"MEDIO MAYOREO":1795,"CLIENTES FORÁNEOS":1770},{"NOMBRE DEL PRODUCTO":"ISOFIT","CATEGORIA":"PROTEINAS","MARCA":"NUTREX","PRECIO VENTA":1460,"MAYOREO 3 MIL":1356,"MAYOREO 6 MIL":1341,"MEDIO MAYOREO":1406,"CLIENTES FORÁNEOS":1381},{"NOMBRE DEL PRODUCTO":"ISOPURE","CATEGORIA":"PROTEINAS","MARCA":"NATURE BEST","PRECIO VENTA":1270,"MAYOREO 3 MIL":1155,"MAYOREO 6 MIL":1140,"MEDIO MAYOREO":1205,"CLIENTES FORÁNEOS":1180},{"NOMBRE DEL PRODUCTO":"ISOPURE GRANDE","CATEGORIA":"PROTEINAS","MARCA":"NATURE BEST","PRECIO VENTA":1720,"MAYOREO 3 MIL":1568,"MAYOREO 6 MIL":1550,"MEDIO MAYOREO":1638,"CLIENTES FORÁNEOS":1603},{"NOMBRE DEL PRODUCTO":"JOINT SUPPORT GAT","CATEGORIA":"COLAGENOS","MARCA":"GAT SPORT","PRECIO VENTA":380,"MAYOREO 3 MIL":232,"MAYOREO 6 MIL":217,"MEDIO MAYOREO":282,"CLIENTES FORÁNEOS":257},{"NOMBRE DEL PRODUCTO":"L ARGININA GAT","CATEGORIA":"PRE ENTRENOS","MARCA":"GAT SPORT","PRECIO VENTA":400,"MAYOREO 3 MIL":314,"MAYOREO 6 MIL":302,"MEDIO MAYOREO":354,"CLIENTES FORÁNEOS":334},{"NOMBRE DEL PRODUCTO":"L CARNITINA GAT CAPS","CATEGORIA":"QUEMADORES","MARCA":"GAT SPORT","PRECIO VENTA":340,"MAYOREO 3 MIL":227,"MAYOREO 6 MIL":212,"MEDIO MAYOREO":277,"CLIENTES FORÁNEOS":252},{"NOMBRE DEL PRODUCTO":"L CARNITINA ULTRA LIQUIDA","CATEGORIA":"QUEMADORES","MARCA":"BHP","PRECIO VENTA":290,"MAYOREO 3 MIL":185,"MAYOREO 6 MIL":173,"MEDIO MAYOREO":225,"CLIENTES FORÁNEOS":205},{"NOMBRE DEL PRODUCTO":"LIPO 6 BLACK HERS 60 CAPS","CATEGORIA":"QUEMADORES","MARCA":"NUTREX","PRECIO VENTA":440,"MAYOREO 3 MIL":301,"MAYOREO 6 MIL":286,"MEDIO MAYOREO":351,"CLIENTES FORÁNEOS":326},{"NOMBRE DEL PRODUCTO":"LIPO 6 BLACK ROJO 120 CAPS","CATEGORIA":"QUEMADORES","MARCA":"NUTREX","PRECIO VENTA":440,"MAYOREO 3 MIL":308,"MAYOREO 6 MIL":293,"MEDIO MAYOREO":358,"CLIENTES FORÁNEOS":333},{"NOMBRE DEL PRODUCTO":"LIPODRENE AMARILLO","CATEGORIA":"QUEMADORES","MARCA":"HTP","PRECIO VENTA":600,"MAYOREO 3 MIL":458,"MAYOREO 6 MIL":443,"MEDIO MAYOREO":508,"CLIENTES FORÁNEOS":483},{"NOMBRE DEL PRODUCTO":"LIPODRENE NEGRO","CATEGORIA":"QUEMADORES","MARCA":"HTP","PRECIO VENTA":600,"MAYOREO 3 MIL":459,"MAYOREO 6 MIL":444,"MEDIO MAYOREO":509,"CLIENTES FORÁNEOS":484},{"NOMBRE DEL PRODUCTO":"LIPODRENE VERDE","CATEGORIA":"QUEMADORES","MARCA":"HTP","PRECIO VENTA":600,"MAYOREO 3 MIL":450,"MAYOREO 6 MIL":432,"MEDIO MAYOREO":520,"CLIENTES FORÁNEOS":485},{"NOMBRE DEL PRODUCTO":"MADNESS MUTANT","CATEGORIA":"PRE ENTRENOS","MARCA":"MUTANT","PRECIO VENTA":370,"MAYOREO 3 MIL":268,"MAYOREO 6 MIL":253,"MEDIO MAYOREO":318,"CLIENTES FORÁNEOS":293},{"NOMBRE DEL PRODUCTO":"MASS TECH EXTREME 2000","CATEGORIA":"GANADORES DE PESO","MARCA":"MUSCLETECH","PRECIO VENTA":820,"MAYOREO 3 MIL":693,"MAYOREO 6 MIL":678,"MEDIO MAYOREO":743,"CLIENTES FORÁNEOS":718},{"NOMBRE DEL PRODUCTO":"MESOFRANCE PEPTONAS","CATEGORIA":"OTROS","MARCA":"MESOFRANCE","PRECIO VENTA":600,"MAYOREO 3 MIL":410,"MAYOREO 6 MIL":387,"MEDIO MAYOREO":540,"CLIENTES FORÁNEOS":475},{"NOMBRE DEL PRODUCTO":"MULTI VITAMIN + TEST CHICO","CATEGORIA":"VITAMINAS/PRECURSORES","MARCA":"GAT SPORT","PRECIO VENTA":350,"MAYOREO 3 MIL":236,"MAYOREO 6 MIL":221,"MEDIO MAYOREO":286,"CLIENTES FORÁNEOS":261},{"NOMBRE DEL PRODUCTO":"MULTI VITAMIN + TEST GRANDE","CATEGORIA":"VITAMINAS/PRECURSORES","MARCA":"GAT SPORT","PRECIO VENTA":490,"MAYOREO 3 MIL":401,"MAYOREO 6 MIL":389,"MEDIO MAYOREO":441,"CLIENTES FORÁNEOS":421},{"NOMBRE DEL PRODUCTO":"MULTIVITAMINICO PLATINUM","CATEGORIA":"VITAMINAS","MARCA":"MUSCLETECH","PRECIO VENTA":350,"MAYOREO 3 MIL":242,"MAYOREO 6 MIL":227,"MEDIO MAYOREO":292,"CLIENTES FORÁNEOS":267},{"NOMBRE DEL PRODUCTO":"MUTANT MASS CHICO","CATEGORIA":"GANADORES DE PESO","MARCA":"MUTANT","PRECIO VENTA":590,"MAYOREO 3 MIL":440,"MAYOREO 6 MIL":425,"MEDIO MAYOREO":490,"CLIENTES FORÁNEOS":465},{"NOMBRE DEL PRODUCTO":"MUTANT MASS GRANDE","CATEGORIA":"GANADORES DE PESO","MARCA":"MUTANT","PRECIO VENTA":1160,"MAYOREO 3 MIL":1024,"MAYOREO 6 MIL":1009,"MEDIO MAYOREO":1074,"CLIENTES FORÁNEOS":1049},{"NOMBRE DEL PRODUCTO":"MUTANT WHEY 10 LBS","CATEGORIA":"PROTEINAS","MARCA":"MUTANT","PRECIO VENTA":1590,"MAYOREO 3 MIL":1433,"MAYOREO 6 MIL":1413,"MEDIO MAYOREO":1543,"CLIENTES FORÁNEOS":1488},{"NOMBRE DEL PRODUCTO":"MUTANT WHEY 5 LBS","CATEGORIA":"PROTEINAS","MARCA":"MUTANT","PRECIO VENTA":920,"MAYOREO 3 MIL":795,"MAYOREO 6 MIL":780,"MEDIO MAYOREO":845,"CLIENTES FORÁNEOS":820},{"NOMBRE DEL PRODUCTO":"MUTANT WHEY DUAL","CATEGORIA":"PROTEINAS","MARCA":"MUTANT","PRECIO VENTA":860,"MAYOREO 3 MIL":739,"MAYOREO 6 MIL":724,"MEDIO MAYOREO":789,"CLIENTES FORÁNEOS":764},{"NOMBRE DEL PRODUCTO":"NITRAFLEX","CATEGORIA":"PRE ENTRENOS","MARCA":"GAT SPORT","PRECIO VENTA":560,"MAYOREO 3 MIL":386,"MAYOREO 6 MIL":366,"MEDIO MAYOREO":496,"CLIENTES FORÁNEOS":441},{"NOMBRE DEL PRODUCTO":"NITRO TECH PERFORMANCE 4 LBS","CATEGORIA":"PROTEINAS","MARCA":"MUSCLETECH","PRECIO VENTA":1090,"MAYOREO 3 MIL":991,"MAYOREO 6 MIL":979,"MEDIO MAYOREO":1031,"CLIENTES FORÁNEOS":1011},{"NOMBRE DEL PRODUCTO":"NITRO TECH WHEY GOLD 2 LBS","CATEGORIA":"PROTEINAS","MARCA":"MUSCLETECH","PRECIO VENTA":690,"MAYOREO 3 MIL":576,"MAYOREO 6 MIL":561,"MEDIO MAYOREO":626,"CLIENTES FORÁNEOS":601},{"NOMBRE DEL PRODUCTO":"NITRO TECH WHEY GOLD 5 LBS","CATEGORIA":"PROTEINAS","MARCA":"MUSCLETECH","PRECIO VENTA":1250,"MAYOREO 3 MIL":1131,"MAYOREO 6 MIL":1116,"MEDIO MAYOREO":1181,"CLIENTES FORÁNEOS":1156},{"NOMBRE DEL PRODUCTO":"NITROTECH RIPPED 4 LBS","CATEGORIA":"PROTEINAS","MARCA":"MUSCLETECH","PRECIO VENTA":1090,"MAYOREO 3 MIL":986,"MAYOREO 6 MIL":971,"MEDIO MAYOREO":1036,"CLIENTES FORÁNEOS":1011},{"NOMBRE DEL PRODUCTO":"OMEGA 3 GAT","CATEGORIA":"VITAMINAS","MARCA":"GAT SPORT","PRECIO VENTA":430,"MAYOREO 3 MIL":251,"MAYOREO 6 MIL":233,"MEDIO MAYOREO":321,"CLIENTES FORÁNEOS":286},{"NOMBRE DEL PRODUCTO":"OPTI MEN","CATEGORIA":"VITAMINAS","MARCA":"ON","PRECIO VENTA":600,"MAYOREO 3 MIL":487,"MAYOREO 6 MIL":472,"MEDIO MAYOREO":537,"CLIENTES FORÁNEOS":512},{"NOMBRE DEL PRODUCTO":"OPTI WOMEN","CATEGORIA":"VITAMINAS","MARCA":"ON","PRECIO VENTA":470,"MAYOREO 3 MIL":380,"MAYOREO 6 MIL":368,"MEDIO MAYOREO":420,"CLIENTES FORÁNEOS":400},{"NOMBRE DEL PRODUCTO":"PHANTOM XS","CATEGORIA":"QUEMADORES","MARCA":"NUBREED","PRECIO VENTA":420,"MAYOREO 3 MIL":317,"MAYOREO 6 MIL":305,"MEDIO MAYOREO":357,"CLIENTES FORÁNEOS":337},{"NOMBRE DEL PRODUCTO":"PHARLABS ISOLATE","CATEGORIA":"PROTEINAS","MARCA":"PHARLABS","PRECIO VENTA":790,"MAYOREO 3 MIL":640,"MAYOREO 6 MIL":625,"MEDIO MAYOREO":690,"CLIENTES FORÁNEOS":665},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC DORADO","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":520,"MAYOREO 3 MIL":381,"MAYOREO 6 MIL":366,"MEDIO MAYOREO":431,"CLIENTES FORÁNEOS":406},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC NEGRO","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":440,"MAYOREO 3 MIL":319,"MAYOREO 6 MIL":304,"MEDIO MAYOREO":369,"CLIENTES FORÁNEOS":344},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC ROJO CHICO","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":460,"MAYOREO 3 MIL":359,"MAYOREO 6 MIL":344,"MEDIO MAYOREO":409,"CLIENTES FORÁNEOS":384},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC ROJO GRANDE","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":670,"MAYOREO 3 MIL":499,"MAYOREO 6 MIL":481,"MEDIO MAYOREO":569,"CLIENTES FORÁNEOS":534},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC SAW","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":520,"MAYOREO 3 MIL":412,"MAYOREO 6 MIL":397,"MEDIO MAYOREO":462,"CLIENTES FORÁNEOS":437},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC SAW GRANDE","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":720,"MAYOREO 3 MIL":577,"MAYOREO 6 MIL":562,"MEDIO MAYOREO":627,"CLIENTES FORÁNEOS":602},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC SOBRES NEGRO","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":550,"MAYOREO 3 MIL":459,"MAYOREO 6 MIL":447,"MEDIO MAYOREO":499,"CLIENTES FORÁNEOS":479},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC SOBRES ROJO","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":580,"MAYOREO 3 MIL":460,"MAYOREO 6 MIL":445,"MEDIO MAYOREO":510,"CLIENTES FORÁNEOS":485},{"NOMBRE DEL PRODUCTO":"PYSCHOTIC SOBRES DORADO","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":590,"MAYOREO 3 MIL":489,"MAYOREO 6 MIL":477,"MEDIO MAYOREO":529,"CLIENTES FORÁNEOS":509},{"NOMBRE DEL PRODUCTO":"REYKON CREATINA GRANDE","CATEGORIA":"CREATINAS","MARCA":"REYKON","PRECIO VENTA":430,"MAYOREO 3 MIL":267,"MAYOREO 6 MIL":249,"MEDIO MAYOREO":337,"CLIENTES FORÁNEOS":302},{"NOMBRE DEL PRODUCTO":"REYKON PRIMATE BURST","CATEGORIA":"PROTEINAS","MARCA":"REYKON","PRECIO VENTA":650,"MAYOREO 3 MIL":485,"MAYOREO 6 MIL":465,"MEDIO MAYOREO":595,"CLIENTES FORÁNEOS":540},{"NOMBRE DEL PRODUCTO":"REYKON ZERO 1 KG","CATEGORIA":"PROTEINAS","MARCA":"REYKON","PRECIO VENTA":350,"MAYOREO 3 MIL":200,"MAYOREO 6 MIL":185,"MEDIO MAYOREO":250,"CLIENTES FORÁNEOS":225},{"NOMBRE DEL PRODUCTO":"REYKON ZERO 10 KG","CATEGORIA":"PROTEINAS","MARCA":"REYKON","PRECIO VENTA":1350,"MAYOREO 3 MIL":965,"MAYOREO 6 MIL":942,"MEDIO MAYOREO":1095,"CLIENTES FORÁNEOS":1030},{"NOMBRE DEL PRODUCTO":"REYKON ZERO 6 KG","CATEGORIA":"PROTEINAS","MARCA":"REYKON","PRECIO VENTA":950,"MAYOREO 3 MIL":585,"MAYOREO 6 MIL":562,"MEDIO MAYOREO":715,"CLIENTES FORÁNEOS":650},{"NOMBRE DEL PRODUCTO":"REYKON ZERO MULTISABOR","CATEGORIA":"PROTEINAS","MARCA":"REYKON","PRECIO VENTA":950,"MAYOREO 3 MIL":705,"MAYOREO 6 MIL":682,"MEDIO MAYOREO":835,"CLIENTES FORÁNEOS":770},{"NOMBRE DEL PRODUCTO":"RYSE LOADED PRE","CATEGORIA":"PRE ENTRENOS","MARCA":"RYSE","PRECIO VENTA":660,"MAYOREO 3 MIL":520,"MAYOREO 6 MIL":505,"MEDIO MAYOREO":570,"CLIENTES FORÁNEOS":545},{"NOMBRE DEL PRODUCTO":"SERIOUS MASS CHICO","CATEGORIA":"GANADORES DE PESO","MARCA":"ON","PRECIO VENTA":790,"MAYOREO 3 MIL":670,"MAYOREO 6 MIL":655,"MEDIO MAYOREO":720,"CLIENTES FORÁNEOS":695},{"NOMBRE DEL PRODUCTO":"SERIOUS MASS GRANDE","CATEGORIA":"GANADORES DE PESO","MARCA":"ON","PRECIO VENTA":1220,"MAYOREO 3 MIL":1084,"MAYOREO 6 MIL":1069,"MEDIO MAYOREO":1134,"CLIENTES FORÁNEOS":1109},{"NOMBRE DEL PRODUCTO":"SHAKER COLOR LISO","CATEGORIA":"ACCESORIOS","MARCA":"BLENDER BOTTLE","PRECIO VENTA":280,"MAYOREO 3 MIL":208,"MAYOREO 6 MIL":196,"MEDIO MAYOREO":248,"CLIENTES FORÁNEOS":228},{"NOMBRE DEL PRODUCTO":"SHAKER SYNTRAX","CATEGORIA":"ACCESORIOS","MARCA":"SYNTRAX","PRECIO VENTA":230,"MAYOREO 3 MIL":135,"MAYOREO 6 MIL":123,"MEDIO MAYOREO":175,"CLIENTES FORÁNEOS":155},{"NOMBRE DEL PRODUCTO":"SHAKER GARRAFON","CATEGORIA":"ACCESORIOS","MARCA":"BSN","PRECIO VENTA":280,"MAYOREO 3 MIL":180,"MAYOREO 6 MIL":168,"MEDIO MAYOREO":220,"CLIENTES FORÁNEOS":200},{"NOMBRE DEL PRODUCTO":"SHAKER SUPER HEROES","CATEGORIA":"ACCESORIOS","MARCA":"PERFECT","PRECIO VENTA":320,"MAYOREO 3 MIL":243,"MAYOREO 6 MIL":231,"MEDIO MAYOREO":283,"CLIENTES FORÁNEOS":263},{"NOMBRE DEL PRODUCTO":"STRAPS (CAYERAS)","CATEGORIA":"ACCESORIOS","MARCA":"-","PRECIO VENTA":250,"MAYOREO 3 MIL":170,"MAYOREO 6 MIL":158,"MEDIO MAYOREO":210,"CLIENTES FORÁNEOS":190},{"NOMBRE DEL PRODUCTO":"SUPER PUMP MAX","CATEGORIA":"PRE ENTRENOS","MARCA":"GASPARI","PRECIO VENTA":590,"MAYOREO 3 MIL":482,"MAYOREO 6 MIL":467,"MEDIO MAYOREO":532,"CLIENTES FORÁNEOS":507},{"NOMBRE DEL PRODUCTO":"TESTROL GOLD","CATEGORIA":"PRECURSORES","MARCA":"GAT SPORT","PRECIO VENTA":530,"MAYOREO 3 MIL":350,"MAYOREO 6 MIL":330,"MEDIO MAYOREO":460,"CLIENTES FORÁNEOS":405},{"NOMBRE DEL PRODUCTO":"TESTROL ORIGINAL","CATEGORIA":"PRECURSORES","MARCA":"GAT SPORT","PRECIO VENTA":500,"MAYOREO 3 MIL":324,"MAYOREO 6 MIL":301,"MEDIO MAYOREO":454,"CLIENTES FORÁNEOS":389},{"NOMBRE DEL PRODUCTO":"THE CURSE","CATEGORIA":"PRE ENTRENOS","MARCA":"COBRA LABS","PRECIO VENTA":500,"MAYOREO 3 MIL":361,"MAYOREO 6 MIL":343,"MEDIO MAYOREO":431,"CLIENTES FORÁNEOS":396},{"NOMBRE DEL PRODUCTO":"TOTAL WAR","CATEGORIA":"PRE ENTRENOS","MARCA":"REDCON1","PRECIO VENTA":530,"MAYOREO 3 MIL":397,"MAYOREO 6 MIL":379,"MEDIO MAYOREO":467,"CLIENTES FORÁNEOS":432},{"NOMBRE DEL PRODUCTO":"VAPOR X","CATEGORIA":"PRE ENTRENOS","MARCA":"MUSCLETECH","PRECIO VENTA":460,"MAYOREO 3 MIL":357,"MAYOREO 6 MIL":342,"MEDIO MAYOREO":407,"CLIENTES FORÁNEOS":382},{"NOMBRE DEL PRODUCTO":"VEGAN NATURALS","CATEGORIA":"PROTEINAS","MARCA":"ADVANCED NUTRITION","PRECIO VENTA":850,"MAYOREO 3 MIL":749,"MAYOREO 6 MIL":734,"MEDIO MAYOREO":799,"CLIENTES FORÁNEOS":774},{"NOMBRE DEL PRODUCTO":"VENOM INFERNO","CATEGORIA":"PRE ENTRENOS","MARCA":"DRAGON PHARMA","PRECIO VENTA":520,"MAYOREO 3 MIL":414,"MAYOREO 6 MIL":402,"MEDIO MAYOREO":454,"CLIENTES FORÁNEOS":434},{"NOMBRE DEL PRODUCTO":"VITAMINA C INSANE","CATEGORIA":"VITAMINAS","MARCA":"INSANE","PRECIO VENTA":340,"MAYOREO 3 MIL":216,"MAYOREO 6 MIL":201,"MEDIO MAYOREO":266,"CLIENTES FORÁNEOS":241},{"NOMBRE DEL PRODUCTO":"WHEY HD","CATEGORIA":"PROTEINAS","MARCA":"BPI","PRECIO VENTA":990,"MAYOREO 3 MIL":890,"MAYOREO 6 MIL":878,"MEDIO MAYOREO":930,"CLIENTES FORÁNEOS":910},{"NOMBRE DEL PRODUCTO":"XTINCTION MULTISABOR","CATEGORIA":"PROTEINAS","MARCA":"XTINCTION","PRECIO VENTA":850,"MAYOREO 3 MIL":605,"MAYOREO 6 MIL":582,"MEDIO MAYOREO":735,"CLIENTES FORÁNEOS":670},{"NOMBRE DEL PRODUCTO":"YOHIMBINE","CATEGORIA":"QUEMADORES","MARCA":"ALLMAX","PRECIO VENTA":350,"MAYOREO 3 MIL":251,"MAYOREO 6 MIL":239,"MEDIO MAYOREO":291,"CLIENTES FORÁNEOS":271},{"NOMBRE DEL PRODUCTO":"ZMAG GAT","CATEGORIA":"OTROS","MARCA":"GAT SPORT","PRECIO VENTA":320,"MAYOREO 3 MIL":216,"MAYOREO 6 MIL":204,"MEDIO MAYOREO":256,"CLIENTES FORÁNEOS":236}];
+const RAW = [{"NOMBRE DEL PRODUCTO":"43 BCAA + GLUTAMINA","CATEGORIA":"AMINOACIDOS/GLUTAMINAS","MARCA":"43 SUPPLEMENTS","PRECIO VENTA":390,"MAYOREO 3 MIL":255,"MAYOREO 6 MIL":237,"MEDIO MAYOREO":325,"CLIENTES FORÁNEOS":290},{"NOMBRE DEL PRODUCTO":"43 ZERO 2.4 KG","CATEGORIA":"PROTEINAS","MARCA":"43 SUPPLEMENTS","PRECIO VENTA":600,"MAYOREO 3 MIL":475,"MAYOREO 6 MIL":460,"MEDIO MAYOREO":525,"CLIENTES FORÁNEOS":500},{"NOMBRE DEL PRODUCTO":"43 ZERO 6 KG","CATEGORIA":"PROTEINAS","MARCA":"43 SUPPLEMENTS","PRECIO VENTA":990,"MAYOREO 3 MIL":785,"MAYOREO 6 MIL":762,"MEDIO MAYOREO":915,"CLIENTES FORÁNEOS":850},{"NOMBRE DEL PRODUCTO":"ACXION","CATEGORIA":"FARMACOLOGIA","MARCA":"IFA","PRECIO VENTA":490,"MAYOREO 3 MIL":340,"MAYOREO 6 MIL":325,"MEDIO MAYOREO":390,"CLIENTES FORÁNEOS":365},{"NOMBRE DEL PRODUCTO":"AMINO ENERGY ON CHICO","CATEGORIA":"AMINOACIDOS","MARCA":"ON","PRECIO VENTA":480,"MAYOREO 3 MIL":335,"MAYOREO 6 MIL":320,"MEDIO MAYOREO":385,"CLIENTES FORÁNEOS":360},{"NOMBRE DEL PRODUCTO":"AMINO ENERGY ON GRANDE","CATEGORIA":"AMINOACIDOS","MARCA":"ON","PRECIO VENTA":820,"MAYOREO 3 MIL":643,"MAYOREO 6 MIL":620,"MEDIO MAYOREO":773,"CLIENTES FORÁNEOS":708},{"NOMBRE DEL PRODUCTO":"AMINO X CHICO","CATEGORIA":"AMINOACIDOS","MARCA":"BSN","PRECIO VENTA":480,"MAYOREO 3 MIL":331,"MAYOREO 6 MIL":316,"MEDIO MAYOREO":381,"CLIENTES FORÁNEOS":356},{"NOMBRE DEL PRODUCTO":"AMINO X GRANDE","CATEGORIA":"AMINOACIDOS","MARCA":"BSN","PRECIO VENTA":850,"MAYOREO 3 MIL":677,"MAYOREO 6 MIL":657,"MEDIO MAYOREO":787,"CLIENTES FORÁNEOS":732},{"NOMBRE DEL PRODUCTO":"AMINOJECT","CATEGORIA":"AMINOACIDOS","MARCA":"EVOGEN","PRECIO VENTA":630,"MAYOREO 3 MIL":508,"MAYOREO 6 MIL":493,"MEDIO MAYOREO":558,"CLIENTES FORÁNEOS":533},{"NOMBRE DEL PRODUCTO":"ANGUS MASS","CATEGORIA":"GANADORES DE PESO","MARCA":"BHP","PRECIO VENTA":740,"MAYOREO 3 MIL":629,"MAYOREO 6 MIL":614,"MEDIO MAYOREO":679,"CLIENTES FORÁNEOS":654},{"NOMBRE DEL PRODUCTO":"ANIMAL FLEX","CATEGORIA":"COLAGENOS","MARCA":"UNIVERSAL","PRECIO VENTA":600,"MAYOREO 3 MIL":508,"MAYOREO 6 MIL":496,"MEDIO MAYOREO":548,"CLIENTES FORÁNEOS":528},{"NOMBRE DEL PRODUCTO":"ANIMAL PACK","CATEGORIA":"VITAMINAS","MARCA":"UNIVERSAL","PRECIO VENTA":770,"MAYOREO 3 MIL":621,"MAYOREO 6 MIL":603,"MEDIO MAYOREO":691,"CLIENTES FORÁNEOS":656},{"NOMBRE DEL PRODUCTO":"B NOVA BCAA","CATEGORIA":"AMINOACIDOS","MARCA":"B NOVA","PRECIO VENTA":350,"MAYOREO 3 MIL":245,"MAYOREO 6 MIL":230,"MEDIO MAYOREO":295,"CLIENTES FORÁNEOS":270},{"NOMBRE DEL PRODUCTO":"B NOVA CREATINA CHICA","CATEGORIA":"CREATINAS","MARCA":"B NOVA","PRECIO VENTA":330,"MAYOREO 3 MIL":235,"MAYOREO 6 MIL":223,"MEDIO MAYOREO":275,"CLIENTES FORÁNEOS":255},{"NOMBRE DEL PRODUCTO":"B NOVA CREATINA GRANDE","CATEGORIA":"CREATINAS","MARCA":"B NOVA","PRECIO VENTA":400,"MAYOREO 3 MIL":290,"MAYOREO 6 MIL":275,"MEDIO MAYOREO":340,"CLIENTES FORÁNEOS":315},{"NOMBRE DEL PRODUCTO":"B NOVA ISO FEMME 1 KG","CATEGORIA":"PROTEINAS","MARCA":"B NOVA","PRECIO VENTA":350,"MAYOREO 3 MIL":260,"MAYOREO 6 MIL":248,"MEDIO MAYOREO":300,"CLIENTES FORÁNEOS":280},{"NOMBRE DEL PRODUCTO":"B NOVA PEPTONAS","CATEGORIA":"OTROS","MARCA":"B NOVA","PRECIO VENTA":480,"MAYOREO 3 MIL":335,"MAYOREO 6 MIL":317,"MEDIO MAYOREO":405,"CLIENTES FORÁNEOS":370},{"NOMBRE DEL PRODUCTO":"B NOVA ZERO 1 KG","CATEGORIA":"PROTEINAS","MARCA":"B NOVA","PRECIO VENTA":330,"MAYOREO 3 MIL":245,"MAYOREO 6 MIL":233,"MEDIO MAYOREO":285,"CLIENTES FORÁNEOS":265},{"NOMBRE DEL PRODUCTO":"B NOVA ZERO 4.5 KG","CATEGORIA":"PROTEINAS","MARCA":"B NOVA","PRECIO VENTA":690,"MAYOREO 3 MIL":585,"MAYOREO 6 MIL":573,"MEDIO MAYOREO":625,"CLIENTES FORÁNEOS":605},{"NOMBRE DEL PRODUCTO":"BCAA MUTANT","CATEGORIA":"AMINOACIDOS","MARCA":"MUTANT","PRECIO VENTA":400,"MAYOREO 3 MIL":262,"MAYOREO 6 MIL":244,"MEDIO MAYOREO":332,"CLIENTES FORÁNEOS":297},{"NOMBRE DEL PRODUCTO":"BCAA SUPREME","CATEGORIA":"AMINOACIDOS","MARCA":"USP LABS","PRECIO VENTA":470,"MAYOREO 3 MIL":348,"MAYOREO 6 MIL":333,"MEDIO MAYOREO":398,"CLIENTES FORÁNEOS":373},{"NOMBRE DEL PRODUCTO":"BETA ALANINA GAT","CATEGORIA":"PRE ENTRENOS","MARCA":"GAT SPORT","PRECIO VENTA":490,"MAYOREO 3 MIL":372,"MAYOREO 6 MIL":357,"MEDIO MAYOREO":422,"CLIENTES FORÁNEOS":397},{"NOMBRE DEL PRODUCTO":"BHP WHEY ULTRA","CATEGORIA":"PROTEINAS","MARCA":"BHP","PRECIO VENTA":840,"MAYOREO 3 MIL":755,"MAYOREO 6 MIL":743,"MEDIO MAYOREO":795,"CLIENTES FORÁNEOS":775},{"NOMBRE DEL PRODUCTO":"BLACK SPIDER","CATEGORIA":"QUEMADORES","MARCA":"CLOMA PHARMA","PRECIO VENTA":500,"MAYOREO 3 MIL":333,"MAYOREO 6 MIL":315,"MEDIO MAYOREO":403,"CLIENTES FORÁNEOS":368},{"NOMBRE DEL PRODUCTO":"BLIFE 3 MAG BLEND","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":290,"MAYOREO 3 MIL":189,"MAYOREO 6 MIL":177,"MEDIO MAYOREO":229,"CLIENTES FORÁNEOS":209},{"NOMBRE DEL PRODUCTO":"BLIFE 80 BILLION PROBIOTIC","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":400,"MAYOREO 3 MIL":312,"MAYOREO 6 MIL":300,"MEDIO MAYOREO":352,"CLIENTES FORÁNEOS":332},{"NOMBRE DEL PRODUCTO":"BLIFE ACIDO ALFA LIPOICO","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":480,"MAYOREO 3 MIL":380,"MAYOREO 6 MIL":368,"MEDIO MAYOREO":420,"CLIENTES FORÁNEOS":400},{"NOMBRE DEL PRODUCTO":"BLIFE ASHWAGANDA","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":390,"MAYOREO 3 MIL":288,"MAYOREO 6 MIL":273,"MEDIO MAYOREO":338,"CLIENTES FORÁNEOS":313},{"NOMBRE DEL PRODUCTO":"BLIFE B YEAST BLEND","CATEGORIA":"VITAMINAS","MARCA":"BLIFE","PRECIO VENTA":290,"MAYOREO 3 MIL":189,"MAYOREO 6 MIL":177,"MEDIO MAYOREO":229,"CLIENTES FORÁNEOS":209},{"NOMBRE DEL PRODUCTO":"BLIFE BERBERINA","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":340,"MAYOREO 3 MIL":244,"MAYOREO 6 MIL":232,"MEDIO MAYOREO":284,"CLIENTES FORÁNEOS":264},{"NOMBRE DEL PRODUCTO":"BLIFE BOTELLA CON FUNDA","CATEGORIA":"ACCESORIOS","MARCA":"BLIFE","PRECIO VENTA":390,"MAYOREO 3 MIL":313,"MAYOREO 6 MIL":301,"MEDIO MAYOREO":353,"CLIENTES FORÁNEOS":333},{"NOMBRE DEL PRODUCTO":"BLIFE BOTELLA CON TOALLA","CATEGORIA":"ACCESORIOS","MARCA":"BLIFE","PRECIO VENTA":260,"MAYOREO 3 MIL":176,"MAYOREO 6 MIL":164,"MEDIO MAYOREO":216,"CLIENTES FORÁNEOS":196},{"NOMBRE DEL PRODUCTO":"BLIFE BOTELLA TÉRMICA","CATEGORIA":"ACCESORIOS","MARCA":"BLIFE","PRECIO VENTA":320,"MAYOREO 3 MIL":243,"MAYOREO 6 MIL":231,"MEDIO MAYOREO":283,"CLIENTES FORÁNEOS":263},{"NOMBRE DEL PRODUCTO":"BLIFE CALCIO+D3","CATEGORIA":"VITAMINAS","MARCA":"BLIFE","PRECIO VENTA":370,"MAYOREO 3 MIL":294,"MAYOREO 6 MIL":282,"MEDIO MAYOREO":334,"CLIENTES FORÁNEOS":314},{"NOMBRE DEL PRODUCTO":"BLIFE CITRATO DE MAGNESIO CHICO","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":320,"MAYOREO 3 MIL":215,"MAYOREO 6 MIL":200,"MEDIO MAYOREO":265,"CLIENTES FORÁNEOS":240},{"NOMBRE DEL PRODUCTO":"BLIFE CITRATO DE MAGNESIO GRANDE","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":440,"MAYOREO 3 MIL":322,"MAYOREO 6 MIL":307,"MEDIO MAYOREO":372,"CLIENTES FORÁNEOS":347},{"NOMBRE DEL PRODUCTO":"BLIFE CITRATO DE POTASIO","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":280,"MAYOREO 3 MIL":197,"MAYOREO 6 MIL":185,"MEDIO MAYOREO":237,"CLIENTES FORÁNEOS":217},{"NOMBRE DEL PRODUCTO":"BLIFE COLAGENO BIO","CATEGORIA":"COLAGENOS","MARCA":"BLIFE","PRECIO VENTA":290,"MAYOREO 3 MIL":197,"MAYOREO 6 MIL":185,"MEDIO MAYOREO":237,"CLIENTES FORÁNEOS":217},{"NOMBRE DEL PRODUCTO":"BLIFE COLAGENO BLEND","CATEGORIA":"COLAGENOS","MARCA":"BLIFE","PRECIO VENTA":290,"MAYOREO 3 MIL":220,"MAYOREO 6 MIL":208,"MEDIO MAYOREO":260,"CLIENTES FORÁNEOS":240},{"NOMBRE DEL PRODUCTO":"BLIFE CREATINA","CATEGORIA":"CREATINAS","MARCA":"BLIFE","PRECIO VENTA":490,"MAYOREO 3 MIL":389,"MAYOREO 6 MIL":377,"MEDIO MAYOREO":429,"CLIENTES FORÁNEOS":409},{"NOMBRE DEL PRODUCTO":"BLIFE ELECTRO BLEND + CREATINA","CATEGORIA":"CREATINAS","MARCA":"BLIFE","PRECIO VENTA":470,"MAYOREO 3 MIL":380,"MAYOREO 6 MIL":368,"MEDIO MAYOREO":420,"CLIENTES FORÁNEOS":400},{"NOMBRE DEL PRODUCTO":"BLIFE GLICINATO DE MAGNESIO","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":300,"MAYOREO 3 MIL":210,"MAYOREO 6 MIL":198,"MEDIO MAYOREO":250,"CLIENTES FORÁNEOS":230},{"NOMBRE DEL PRODUCTO":"BLIFE JOINT BLEND","CATEGORIA":"COLAGENOS","MARCA":"BLIFE","PRECIO VENTA":340,"MAYOREO 3 MIL":244,"MAYOREO 6 MIL":232,"MEDIO MAYOREO":284,"CLIENTES FORÁNEOS":264},{"NOMBRE DEL PRODUCTO":"BLIFE KIT TOALLAS","CATEGORIA":"ACCESORIOS","MARCA":"BLIFE","PRECIO VENTA":280,"MAYOREO 3 MIL":189,"MAYOREO 6 MIL":177,"MEDIO MAYOREO":229,"CLIENTES FORÁNEOS":209},{"NOMBRE DEL PRODUCTO":"BLIFE MACA BLEND","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":270,"MAYOREO 3 MIL":189,"MAYOREO 6 MIL":177,"MEDIO MAYOREO":229,"CLIENTES FORÁNEOS":209},{"NOMBRE DEL PRODUCTO":"BLIFE MENS BLEND","CATEGORIA":"VITAMINAS","MARCA":"BLIFE","PRECIO VENTA":290,"MAYOREO 3 MIL":189,"MAYOREO 6 MIL":177,"MEDIO MAYOREO":229,"CLIENTES FORÁNEOS":209},{"NOMBRE DEL PRODUCTO":"BLIFE MENS T PLATINUM","CATEGORIA":"PRECURSORES","MARCA":"BLIFE","PRECIO VENTA":490,"MAYOREO 3 MIL":380,"MAYOREO 6 MIL":368,"MEDIO MAYOREO":420,"CLIENTES FORÁNEOS":400},{"NOMBRE DEL PRODUCTO":"BLIFE MYO INOSITOL","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":290,"MAYOREO 3 MIL":196,"MAYOREO 6 MIL":184,"MEDIO MAYOREO":236,"CLIENTES FORÁNEOS":216},{"NOMBRE DEL PRODUCTO":"BLIFE OMEGA 3 CHICO","CATEGORIA":"VITAMINAS","MARCA":"BLIFE","PRECIO VENTA":330,"MAYOREO 3 MIL":220,"MAYOREO 6 MIL":205,"MEDIO MAYOREO":270,"CLIENTES FORÁNEOS":245},{"NOMBRE DEL PRODUCTO":"BLIFE OMEGA 3 GRANDE","CATEGORIA":"VITAMINAS","MARCA":"BLIFE","PRECIO VENTA":480,"MAYOREO 3 MIL":356,"MAYOREO 6 MIL":341,"MEDIO MAYOREO":406,"CLIENTES FORÁNEOS":381},{"NOMBRE DEL PRODUCTO":"BLIFE RESVERATROL","CATEGORIA":"OTROS","MARCA":"BLIFE","PRECIO VENTA":320,"MAYOREO 3 MIL":235,"MAYOREO 6 MIL":223,"MEDIO MAYOREO":275,"CLIENTES FORÁNEOS":255},{"NOMBRE DEL PRODUCTO":"BLIFE TRIBULUS","CATEGORIA":"PRECURSORES","MARCA":"BLIFE","PRECIO VENTA":350,"MAYOREO 3 MIL":278,"MAYOREO 6 MIL":266,"MEDIO MAYOREO":318,"CLIENTES FORÁNEOS":298},{"NOMBRE DEL PRODUCTO":"BLIFE VITAMINA E+BIOTINA","CATEGORIA":"VITAMINAS","MARCA":"BLIFE","PRECIO VENTA":360,"MAYOREO 3 MIL":278,"MAYOREO 6 MIL":266,"MEDIO MAYOREO":318,"CLIENTES FORÁNEOS":298},{"NOMBRE DEL PRODUCTO":"BLIFE WOMENS BLEND","CATEGORIA":"VITAMINAS","MARCA":"BLIFE","PRECIO VENTA":300,"MAYOREO 3 MIL":199,"MAYOREO 6 MIL":184,"MEDIO MAYOREO":249,"CLIENTES FORÁNEOS":224},{"NOMBRE DEL PRODUCTO":"C4 ORIGINAL CHICO","CATEGORIA":"PRE ENTRENOS","MARCA":"CELLUCOR","PRECIO VENTA":470,"MAYOREO 3 MIL":353,"MAYOREO 6 MIL":338,"MEDIO MAYOREO":403,"CLIENTES FORÁNEOS":378},{"NOMBRE DEL PRODUCTO":"C4 ORIGINAL GRANDE","CATEGORIA":"PRE ENTRENOS","MARCA":"CELLUCOR","PRECIO VENTA":640,"MAYOREO 3 MIL":505,"MAYOREO 6 MIL":490,"MEDIO MAYOREO":555,"CLIENTES FORÁNEOS":530},{"NOMBRE DEL PRODUCTO":"CAFEINA GAT","CATEGORIA":"PRE ENTRENOS","MARCA":"GAT SPORT","PRECIO VENTA":280,"MAYOREO 3 MIL":170,"MAYOREO 6 MIL":158,"MEDIO MAYOREO":210,"CLIENTES FORÁNEOS":190},{"NOMBRE DEL PRODUCTO":"CAFEINA MUTANT","CATEGORIA":"PRE ENTRENOS","MARCA":"MUTANT","PRECIO VENTA":300,"MAYOREO 3 MIL":195,"MAYOREO 6 MIL":180,"MEDIO MAYOREO":245,"CLIENTES FORÁNEOS":220},{"NOMBRE DEL PRODUCTO":"CARBOTEIN","CATEGORIA":"AMINOACIDOS","MARCA":"GAT SPORT","PRECIO VENTA":640,"MAYOREO 3 MIL":491,"MAYOREO 6 MIL":473,"MEDIO MAYOREO":561,"CLIENTES FORÁNEOS":526},{"NOMBRE DEL PRODUCTO":"CARNIVOR BOTE","CATEGORIA":"PROTEINAS","MARCA":"MUSCLEMEDS","PRECIO VENTA":980,"MAYOREO 3 MIL":871,"MAYOREO 6 MIL":856,"MEDIO MAYOREO":921,"CLIENTES FORÁNEOS":896},{"NOMBRE DEL PRODUCTO":"CARNIVOR MASS","CATEGORIA":"GANADORES DE PESO","MARCA":"MUSCLEMEDS","PRECIO VENTA":870,"MAYOREO 3 MIL":749,"MAYOREO 6 MIL":734,"MEDIO MAYOREO":799,"CLIENTES FORÁNEOS":774},{"NOMBRE DEL PRODUCTO":"CBUM ESSENTIAL CHICO","CATEGORIA":"PRE ENTRENOS","MARCA":"RAW","PRECIO VENTA":490,"MAYOREO 3 MIL":375,"MAYOREO 6 MIL":360,"MEDIO MAYOREO":425,"CLIENTES FORÁNEOS":400},{"NOMBRE DEL PRODUCTO":"CBUM ITHOLATE CHICA","CATEGORIA":"PROTEINAS","MARCA":"RAW","PRECIO VENTA":840,"MAYOREO 3 MIL":749,"MAYOREO 6 MIL":737,"MEDIO MAYOREO":789,"CLIENTES FORÁNEOS":769},{"NOMBRE DEL PRODUCTO":"CBUM ITHOLATE GRANDE","CATEGORIA":"PROTEINAS","MARCA":"RAW","PRECIO VENTA":1640,"MAYOREO 3 MIL":1509,"MAYOREO 6 MIL":1494,"MEDIO MAYOREO":1559,"CLIENTES FORÁNEOS":1534},{"NOMBRE DEL PRODUCTO":"CELL TECH 3 LBS","CATEGORIA":"CREATINAS","MARCA":"MUSCLETECH","PRECIO VENTA":590,"MAYOREO 3 MIL":478,"MAYOREO 6 MIL":463,"MEDIO MAYOREO":528,"CLIENTES FORÁNEOS":503},{"NOMBRE DEL PRODUCTO":"CELL TECH 6LBS","CATEGORIA":"CREATINAS","MARCA":"MUSCLETECH","PRECIO VENTA":850,"MAYOREO 3 MIL":699,"MAYOREO 6 MIL":681,"MEDIO MAYOREO":769,"CLIENTES FORÁNEOS":734},{"NOMBRE DEL PRODUCTO":"CELL TECH CREACTOR","CATEGORIA":"CREATINAS","MARCA":"MUSCLETECH","PRECIO VENTA":500,"MAYOREO 3 MIL":374,"MAYOREO 6 MIL":359,"MEDIO MAYOREO":424,"CLIENTES FORÁNEOS":399},{"NOMBRE DEL PRODUCTO":"CINTURON","CATEGORIA":"ACCESORIOS","MARCA":"-","PRECIO VENTA":500,"MAYOREO 3 MIL":390,"MAYOREO 6 MIL":375,"MEDIO MAYOREO":440,"CLIENTES FORÁNEOS":415},{"NOMBRE DEL PRODUCTO":"CITRULINA INSANE","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":320,"MAYOREO 3 MIL":218,"MAYOREO 6 MIL":203,"MEDIO MAYOREO":268,"CLIENTES FORÁNEOS":243},{"NOMBRE DEL PRODUCTO":"CLA 1250 GAT","CATEGORIA":"QUEMADORES","MARCA":"GAT SPORT","PRECIO VENTA":350,"MAYOREO 3 MIL":242,"MAYOREO 6 MIL":230,"MEDIO MAYOREO":282,"CLIENTES FORÁNEOS":262},{"NOMBRE DEL PRODUCTO":"CLA+CARNITINA BPI","CATEGORIA":"QUEMADORES","MARCA":"BPI","PRECIO VENTA":450,"MAYOREO 3 MIL":313,"MAYOREO 6 MIL":295,"MEDIO MAYOREO":383,"CLIENTES FORÁNEOS":348},{"NOMBRE DEL PRODUCTO":"COLÁGENO HIDROLIZADO SHE FIT","CATEGORIA":"COLAGENOS","MARCA":"BHP","PRECIO VENTA":440,"MAYOREO 3 MIL":335,"MAYOREO 6 MIL":320,"MEDIO MAYOREO":385,"CLIENTES FORÁNEOS":360},{"NOMBRE DEL PRODUCTO":"COLÁGENO META","CATEGORIA":"COLAGENOS","MARCA":"META","PRECIO VENTA":440,"MAYOREO 3 MIL":316,"MAYOREO 6 MIL":301,"MEDIO MAYOREO":366,"CLIENTES FORÁNEOS":341},{"NOMBRE DEL PRODUCTO":"CREATINA BIRDMAN","CATEGORIA":"CREATINAS","MARCA":"BIRDMAN","PRECIO VENTA":590,"MAYOREO 3 MIL":443,"MAYOREO 6 MIL":428,"MEDIO MAYOREO":493,"CLIENTES FORÁNEOS":468},{"NOMBRE DEL PRODUCTO":"CREATINA CELLUCOR","CATEGORIA":"CREATINAS","MARCA":"CELLUCOR","PRECIO VENTA":560,"MAYOREO 3 MIL":411,"MAYOREO 6 MIL":391,"MEDIO MAYOREO":521,"CLIENTES FORÁNEOS":466},{"NOMBRE DEL PRODUCTO":"CREATINA CREAKON CX8","CATEGORIA":"CREATINAS","MARCA":"MUTANT","PRECIO VENTA":400,"MAYOREO 3 MIL":297,"MAYOREO 6 MIL":282,"MEDIO MAYOREO":347,"CLIENTES FORÁNEOS":322},{"NOMBRE DEL PRODUCTO":"CREATINA DRAGON CHICA","CATEGORIA":"CREATINAS","MARCA":"DRAGON PHARMA","PRECIO VENTA":460,"MAYOREO 3 MIL":348,"MAYOREO 6 MIL":333,"MEDIO MAYOREO":398,"CLIENTES FORÁNEOS":373},{"NOMBRE DEL PRODUCTO":"CREATINA DRAGON GRANDE","CATEGORIA":"CREATINAS","MARCA":"DRAGON PHARMA","PRECIO VENTA":720,"MAYOREO 3 MIL":542,"MAYOREO 6 MIL":519,"MEDIO MAYOREO":672,"CLIENTES FORÁNEOS":607},{"NOMBRE DEL PRODUCTO":"CREATINA ELECTROLYTE","CATEGORIA":"CREATINAS","MARCA":"BIRDMAN","PRECIO VENTA":500,"MAYOREO 3 MIL":390,"MAYOREO 6 MIL":375,"MEDIO MAYOREO":440,"CLIENTES FORÁNEOS":415},{"NOMBRE DEL PRODUCTO":"CREATINA GAT CHICA","CATEGORIA":"CREATINAS","MARCA":"GAT SPORT","PRECIO VENTA":620,"MAYOREO 3 MIL":400,"MAYOREO 6 MIL":377,"MEDIO MAYOREO":530,"CLIENTES FORÁNEOS":465},{"NOMBRE DEL PRODUCTO":"CREATINA GAT GRANDE","CATEGORIA":"CREATINAS","MARCA":"GAT SPORT","PRECIO VENTA":990,"MAYOREO 3 MIL":632,"MAYOREO 6 MIL":609,"MEDIO MAYOREO":762,"CLIENTES FORÁNEOS":697},{"NOMBRE DEL PRODUCTO":"CREATINA HI TECH CHICA","CATEGORIA":"CREATINAS","MARCA":"HTP","PRECIO VENTA":560,"MAYOREO 3 MIL":401,"MAYOREO 6 MIL":381,"MEDIO MAYOREO":511,"CLIENTES FORÁNEOS":456},{"NOMBRE DEL PRODUCTO":"CREATINA HI TECH GRANDE","CATEGORIA":"CREATINAS","MARCA":"HTP","PRECIO VENTA":950,"MAYOREO 3 MIL":784,"MAYOREO 6 MIL":766,"MEDIO MAYOREO":854,"CLIENTES FORÁNEOS":819},{"NOMBRE DEL PRODUCTO":"CREATINA INSANE","CATEGORIA":"CREATINAS","MARCA":"INSANE","PRECIO VENTA":460,"MAYOREO 3 MIL":333,"MAYOREO 6 MIL":318,"MEDIO MAYOREO":383,"CLIENTES FORÁNEOS":358},{"NOMBRE DEL PRODUCTO":"CREATINA META","CATEGORIA":"CREATINAS","MARCA":"META","PRECIO VENTA":500,"MAYOREO 3 MIL":355,"MAYOREO 6 MIL":337,"MEDIO MAYOREO":425,"CLIENTES FORÁNEOS":390},{"NOMBRE DEL PRODUCTO":"CREATINA NUTREX CHICA","CATEGORIA":"CREATINAS","MARCA":"NUTREX","PRECIO VENTA":500,"MAYOREO 3 MIL":335,"MAYOREO 6 MIL":315,"MEDIO MAYOREO":445,"CLIENTES FORÁNEOS":390},{"NOMBRE DEL PRODUCTO":"CREATINA NUTREX GRANDE","CATEGORIA":"CREATINAS","MARCA":"NUTREX","PRECIO VENTA":740,"MAYOREO 3 MIL":531,"MAYOREO 6 MIL":508,"MEDIO MAYOREO":661,"CLIENTES FORÁNEOS":596},{"NOMBRE DEL PRODUCTO":"CREATINA ON","CATEGORIA":"CREATINAS","MARCA":"ON","PRECIO VENTA":590,"MAYOREO 3 MIL":361,"MAYOREO 6 MIL":338,"MEDIO MAYOREO":491,"CLIENTES FORÁNEOS":426},{"NOMBRE DEL PRODUCTO":"CREATINA PLATINUM","CATEGORIA":"CREATINAS","MARCA":"MUSCLETECH","PRECIO VENTA":650,"MAYOREO 3 MIL":495,"MAYOREO 6 MIL":475,"MEDIO MAYOREO":605,"CLIENTES FORÁNEOS":550},{"NOMBRE DEL PRODUCTO":"CREATINA RC CHICA","CATEGORIA":"CREATINAS","MARCA":"RONNIE COLEMAN","PRECIO VENTA":460,"MAYOREO 3 MIL":297,"MAYOREO 6 MIL":279,"MEDIO MAYOREO":367,"CLIENTES FORÁNEOS":332},{"NOMBRE DEL PRODUCTO":"CREATINA RC GRANDE","CATEGORIA":"CREATINAS","MARCA":"RONNIE COLEMAN","PRECIO VENTA":890,"MAYOREO 3 MIL":514,"MAYOREO 6 MIL":491,"MEDIO MAYOREO":644,"CLIENTES FORÁNEOS":579},{"NOMBRE DEL PRODUCTO":"CREATINA ULTRA BHP 300 GRS","CATEGORIA":"CREATINAS","MARCA":"BHP","PRECIO VENTA":370,"MAYOREO 3 MIL":214,"MAYOREO 6 MIL":196,"MEDIO MAYOREO":284,"CLIENTES FORÁNEOS":249},{"NOMBRE DEL PRODUCTO":"CREATINA ULTRA BHP 500 GRS","CATEGORIA":"CREATINAS","MARCA":"BHP","PRECIO VENTA":420,"MAYOREO 3 MIL":249,"MAYOREO 6 MIL":231,"MEDIO MAYOREO":319,"CLIENTES FORÁNEOS":284},{"NOMBRE DEL PRODUCTO":"DEFIT CREATINA CHICA","CATEGORIA":"CREATINAS","MARCA":"DEFIT","PRECIO VENTA":340,"MAYOREO 3 MIL":220,"MAYOREO 6 MIL":205,"MEDIO MAYOREO":270,"CLIENTES FORÁNEOS":245},{"NOMBRE DEL PRODUCTO":"DEFIT CREATINA GRANDE","CATEGORIA":"CREATINAS","MARCA":"DEFIT","PRECIO VENTA":430,"MAYOREO 3 MIL":295,"MAYOREO 6 MIL":280,"MEDIO MAYOREO":345,"CLIENTES FORÁNEOS":320},{"NOMBRE DEL PRODUCTO":"DEFIT FIT FEMME","CATEGORIA":"PROTEINAS","MARCA":"DEFIT","PRECIO VENTA":350,"MAYOREO 3 MIL":205,"MAYOREO 6 MIL":190,"MEDIO MAYOREO":255,"CLIENTES FORÁNEOS":230},{"NOMBRE DEL PRODUCTO":"DEFIT ISOLATE WHEY CHICA","CATEGORIA":"PROTEINAS","MARCA":"DEFIT","PRECIO VENTA":330,"MAYOREO 3 MIL":205,"MAYOREO 6 MIL":190,"MEDIO MAYOREO":255,"CLIENTES FORÁNEOS":230},{"NOMBRE DEL PRODUCTO":"DEFIT ISOLATE WHEY GRANDE","CATEGORIA":"PROTEINAS","MARCA":"DEFIT","PRECIO VENTA":620,"MAYOREO 3 MIL":445,"MAYOREO 6 MIL":425,"MEDIO MAYOREO":555,"CLIENTES FORÁNEOS":500},{"NOMBRE DEL PRODUCTO":"DEFIT PEPTONAS","CATEGORIA":"OTROS","MARCA":"DEFIT","PRECIO VENTA":450,"MAYOREO 3 MIL":285,"MAYOREO 6 MIL":265,"MEDIO MAYOREO":395,"CLIENTES FORÁNEOS":340},{"NOMBRE DEL PRODUCTO":"DEMON BCAA","CATEGORIA":"AMINOACIDOS","MARCA":"INSANE","PRECIO VENTA":490,"MAYOREO 3 MIL":348,"MAYOREO 6 MIL":330,"MEDIO MAYOREO":418,"CLIENTES FORÁNEOS":383},{"NOMBRE DEL PRODUCTO":"DEMON DUST","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":430,"MAYOREO 3 MIL":289,"MAYOREO 6 MIL":274,"MEDIO MAYOREO":339,"CLIENTES FORÁNEOS":314},{"NOMBRE DEL PRODUCTO":"ELITE WHEY 5 LBS","CATEGORIA":"PROTEINAS","MARCA":"DYMATIZE","PRECIO VENTA":1470,"MAYOREO 3 MIL":1343,"MAYOREO 6 MIL":1328,"MEDIO MAYOREO":1393,"CLIENTES FORÁNEOS":1368},{"NOMBRE DEL PRODUCTO":"EVP 3D","CATEGORIA":"PRE ENTRENOS","MARCA":"EVOGEN","PRECIO VENTA":680,"MAYOREO 3 MIL":538,"MAYOREO 6 MIL":520,"MEDIO MAYOREO":608,"CLIENTES FORÁNEOS":573},{"NOMBRE DEL PRODUCTO":"EVP XTREME","CATEGORIA":"PRE ENTRENOS","MARCA":"EVOGEN","PRECIO VENTA":680,"MAYOREO 3 MIL":519,"MAYOREO 6 MIL":501,"MEDIO MAYOREO":589,"CLIENTES FORÁNEOS":554},{"NOMBRE DEL PRODUCTO":"FALCON PERFORMANCE","CATEGORIA":"PROTEINAS","MARCA":"BIRDMAN","PRECIO VENTA":730,"MAYOREO 3 MIL":601,"MAYOREO 6 MIL":586,"MEDIO MAYOREO":651,"CLIENTES FORÁNEOS":626},{"NOMBRE DEL PRODUCTO":"FARMACOLOGIA ROTTERDAM","CATEGORIA":"FARMACOLOGIA","MARCA":"ROTTERDAM","PRECIO VENTA":600,"MAYOREO 3 MIL":450,"MAYOREO 6 MIL":435,"MEDIO MAYOREO":500,"CLIENTES FORÁNEOS":475},{"NOMBRE DEL PRODUCTO":"FARMACOLOGIA SYNTEX LABS","CATEGORIA":"FARMACOLOGIA","MARCA":"SYNTEX LABS","PRECIO VENTA":600,"MAYOREO 3 MIL":420,"MAYOREO 6 MIL":402,"MEDIO MAYOREO":490,"CLIENTES FORÁNEOS":455},{"NOMBRE DEL PRODUCTO":"FARMACOLOGIA XT LABS","CATEGORIA":"FARMACOLOGIA","MARCA":"XT LABS","PRECIO VENTA":600,"MAYOREO 3 MIL":450,"MAYOREO 6 MIL":435,"MEDIO MAYOREO":500,"CLIENTES FORÁNEOS":475},{"NOMBRE DEL PRODUCTO":"FITMINGO","CATEGORIA":"PROTEINAS","MARCA":"BIRDMAN","PRECIO VENTA":980,"MAYOREO 3 MIL":851,"MAYOREO 6 MIL":836,"MEDIO MAYOREO":901,"CLIENTES FORÁNEOS":876},{"NOMBRE DEL PRODUCTO":"FLEXX EAAS","CATEGORIA":"AMINOACIDOS","MARCA":"GAT SPORT","PRECIO VENTA":450,"MAYOREO 3 MIL":375,"MAYOREO 6 MIL":363,"MEDIO MAYOREO":415,"CLIENTES FORÁNEOS":395},{"NOMBRE DEL PRODUCTO":"GAINER ULTRA","CATEGORIA":"GANADORES DE PESO","MARCA":"BHP","PRECIO VENTA":720,"MAYOREO 3 MIL":639,"MAYOREO 6 MIL":627,"MEDIO MAYOREO":679,"CLIENTES FORÁNEOS":659},{"NOMBRE DEL PRODUCTO":"GHOST LEGEND PWO","CATEGORIA":"PRE ENTRENOS","MARCA":"GHOST","PRECIO VENTA":660,"MAYOREO 3 MIL":580,"MAYOREO 6 MIL":568,"MEDIO MAYOREO":620,"CLIENTES FORÁNEOS":600},{"NOMBRE DEL PRODUCTO":"GHOST WHEY 2 LBS","CATEGORIA":"PROTEINAS","MARCA":"GHOST","PRECIO VENTA":800,"MAYOREO 3 MIL":692,"MAYOREO 6 MIL":677,"MEDIO MAYOREO":742,"CLIENTES FORÁNEOS":717},{"NOMBRE DEL PRODUCTO":"GLUTAMINA PURE CHICA","CATEGORIA":"GLUTAMINAS","MARCA":"NUTREX","PRECIO VENTA":320,"MAYOREO 3 MIL":246,"MAYOREO 6 MIL":234,"MEDIO MAYOREO":286,"CLIENTES FORÁNEOS":266},{"NOMBRE DEL PRODUCTO":"GLUTAMINA PURE GRANDE","CATEGORIA":"GLUTAMINAS","MARCA":"NUTREX","PRECIO VENTA":600,"MAYOREO 3 MIL":518,"MAYOREO 6 MIL":506,"MEDIO MAYOREO":558,"CLIENTES FORÁNEOS":538},{"NOMBRE DEL PRODUCTO":"GLUTAMINA GAT","CATEGORIA":"GLUTAMINAS","MARCA":"GAT SPORT","PRECIO VENTA":390,"MAYOREO 3 MIL":276,"MAYOREO 6 MIL":261,"MEDIO MAYOREO":326,"CLIENTES FORÁNEOS":301},{"NOMBRE DEL PRODUCTO":"GLUTAMINA MUTANT","CATEGORIA":"GLUTAMINAS","MARCA":"MUTANT","PRECIO VENTA":330,"MAYOREO 3 MIL":223,"MAYOREO 6 MIL":211,"MEDIO MAYOREO":263,"CLIENTES FORÁNEOS":243},{"NOMBRE DEL PRODUCTO":"GLUTAMINA PLATINUM","CATEGORIA":"GLUTAMINAS","MARCA":"MUSCLETECH","PRECIO VENTA":420,"MAYOREO 3 MIL":339,"MAYOREO 6 MIL":327,"MEDIO MAYOREO":379,"CLIENTES FORÁNEOS":359},{"NOMBRE DEL PRODUCTO":"GOLD STANDARD 10 LBS","CATEGORIA":"PROTEINAS","MARCA":"ON","PRECIO VENTA":2520,"MAYOREO 3 MIL":2383,"MAYOREO 6 MIL":2365,"MEDIO MAYOREO":2453,"CLIENTES FORÁNEOS":2418},{"NOMBRE DEL PRODUCTO":"GOLD STANDARD 2 LBS","CATEGORIA":"PROTEINAS","MARCA":"ON","PRECIO VENTA":840,"MAYOREO 3 MIL":714,"MAYOREO 6 MIL":699,"MEDIO MAYOREO":764,"CLIENTES FORÁNEOS":739},{"NOMBRE DEL PRODUCTO":"GOLD STANDARD 5 LBS","CATEGORIA":"PROTEINAS","MARCA":"ON","PRECIO VENTA":1600,"MAYOREO 3 MIL":1467,"MAYOREO 6 MIL":1452,"MEDIO MAYOREO":1517,"CLIENTES FORÁNEOS":1492},{"NOMBRE DEL PRODUCTO":"GOLD STANDARD ISOLATE","CATEGORIA":"PROTEINAS","MARCA":"ON","PRECIO VENTA":1620,"MAYOREO 3 MIL":1511,"MAYOREO 6 MIL":1499,"MEDIO MAYOREO":1551,"CLIENTES FORÁNEOS":1531},{"NOMBRE DEL PRODUCTO":"HYDROTEIN","CATEGORIA":"PROTEINAS","MARCA":"ADVANCED NUTRITION","PRECIO VENTA":970,"MAYOREO 3 MIL":870,"MAYOREO 6 MIL":858,"MEDIO MAYOREO":910,"CLIENTES FORÁNEOS":890},{"NOMBRE DEL PRODUCTO":"HYDROXYCUT HARDCORE ELITE","CATEGORIA":"QUEMADORES","MARCA":"MUSCLETECH","PRECIO VENTA":450,"MAYOREO 3 MIL":335,"MAYOREO 6 MIL":320,"MEDIO MAYOREO":385,"CLIENTES FORÁNEOS":360},{"NOMBRE DEL PRODUCTO":"INSANE VEINZ","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":470,"MAYOREO 3 MIL":364,"MAYOREO 6 MIL":352,"MEDIO MAYOREO":404,"CLIENTES FORÁNEOS":384},{"NOMBRE DEL PRODUCTO":"ISOPHORM","CATEGORIA":"PROTEINAS","MARCA":"DRAGON PHARMA","PRECIO VENTA":1650,"MAYOREO 3 MIL":1563,"MAYOREO 6 MIL":1551,"MEDIO MAYOREO":1603,"CLIENTES FORÁNEOS":1583},{"NOMBRE DEL PRODUCTO":"ISO 100 1.3 LBS","CATEGORIA":"PROTEINAS","MARCA":"DYMATIZE","PRECIO VENTA":840,"MAYOREO 3 MIL":691,"MAYOREO 6 MIL":676,"MEDIO MAYOREO":741,"CLIENTES FORÁNEOS":716},{"NOMBRE DEL PRODUCTO":"ISO 100 3 LBS","CATEGORIA":"PROTEINAS","MARCA":"DYMATIZE","PRECIO VENTA":1290,"MAYOREO 3 MIL":1166,"MAYOREO 6 MIL":1151,"MEDIO MAYOREO":1216,"CLIENTES FORÁNEOS":1191},{"NOMBRE DEL PRODUCTO":"ISO 100 5 LBS","CATEGORIA":"PROTEINAS","MARCA":"DYMATIZE","PRECIO VENTA":1870,"MAYOREO 3 MIL":1745,"MAYOREO 6 MIL":1730,"MEDIO MAYOREO":1795,"CLIENTES FORÁNEOS":1770},{"NOMBRE DEL PRODUCTO":"ISOFIT","CATEGORIA":"PROTEINAS","MARCA":"NUTREX","PRECIO VENTA":1490,"MAYOREO 3 MIL":1356,"MAYOREO 6 MIL":1341,"MEDIO MAYOREO":1406,"CLIENTES FORÁNEOS":1381},{"NOMBRE DEL PRODUCTO":"ISOPURE","CATEGORIA":"PROTEINAS","MARCA":"NATURE BEST","PRECIO VENTA":1320,"MAYOREO 3 MIL":1180,"MAYOREO 6 MIL":1165,"MEDIO MAYOREO":1230,"CLIENTES FORÁNEOS":1205},{"NOMBRE DEL PRODUCTO":"ISOPURE GRANDE","CATEGORIA":"PROTEINAS","MARCA":"NATURE BEST","PRECIO VENTA":1790,"MAYOREO 3 MIL":1646,"MAYOREO 6 MIL":1631,"MEDIO MAYOREO":1696,"CLIENTES FORÁNEOS":1671},{"NOMBRE DEL PRODUCTO":"JOINT SUPPORT GAT","CATEGORIA":"COLAGENOS","MARCA":"GAT SPORT","PRECIO VENTA":380,"MAYOREO 3 MIL":232,"MAYOREO 6 MIL":217,"MEDIO MAYOREO":282,"CLIENTES FORÁNEOS":257},{"NOMBRE DEL PRODUCTO":"L ARGININA GAT","CATEGORIA":"PRE ENTRENOS","MARCA":"GAT SPORT","PRECIO VENTA":400,"MAYOREO 3 MIL":314,"MAYOREO 6 MIL":302,"MEDIO MAYOREO":354,"CLIENTES FORÁNEOS":334},{"NOMBRE DEL PRODUCTO":"L CARNITINA GAT CAPS","CATEGORIA":"QUEMADORES","MARCA":"GAT SPORT","PRECIO VENTA":340,"MAYOREO 3 MIL":227,"MAYOREO 6 MIL":212,"MEDIO MAYOREO":277,"CLIENTES FORÁNEOS":252},{"NOMBRE DEL PRODUCTO":"L CARNITINA ULTRA LIQUIDA","CATEGORIA":"QUEMADORES","MARCA":"BHP","PRECIO VENTA":290,"MAYOREO 3 MIL":185,"MAYOREO 6 MIL":173,"MEDIO MAYOREO":225,"CLIENTES FORÁNEOS":205},{"NOMBRE DEL PRODUCTO":"LIPO 6 BLACK HERS 60 CAPS","CATEGORIA":"QUEMADORES","MARCA":"NUTREX","PRECIO VENTA":440,"MAYOREO 3 MIL":301,"MAYOREO 6 MIL":286,"MEDIO MAYOREO":351,"CLIENTES FORÁNEOS":326},{"NOMBRE DEL PRODUCTO":"LIPO 6 BLACK ROJO 120 CAPS","CATEGORIA":"QUEMADORES","MARCA":"NUTREX","PRECIO VENTA":440,"MAYOREO 3 MIL":308,"MAYOREO 6 MIL":293,"MEDIO MAYOREO":358,"CLIENTES FORÁNEOS":333},{"NOMBRE DEL PRODUCTO":"LIPODRENE AMARILLO","CATEGORIA":"QUEMADORES","MARCA":"HTP","PRECIO VENTA":600,"MAYOREO 3 MIL":458,"MAYOREO 6 MIL":443,"MEDIO MAYOREO":508,"CLIENTES FORÁNEOS":483},{"NOMBRE DEL PRODUCTO":"LIPODRENE NEGRO","CATEGORIA":"QUEMADORES","MARCA":"HTP","PRECIO VENTA":600,"MAYOREO 3 MIL":459,"MAYOREO 6 MIL":444,"MEDIO MAYOREO":509,"CLIENTES FORÁNEOS":484},{"NOMBRE DEL PRODUCTO":"LIPODRENE VERDE","CATEGORIA":"QUEMADORES","MARCA":"HTP","PRECIO VENTA":600,"MAYOREO 3 MIL":450,"MAYOREO 6 MIL":432,"MEDIO MAYOREO":520,"CLIENTES FORÁNEOS":485},{"NOMBRE DEL PRODUCTO":"MADNESS MUTANT","CATEGORIA":"PRE ENTRENOS","MARCA":"MUTANT","PRECIO VENTA":370,"MAYOREO 3 MIL":268,"MAYOREO 6 MIL":253,"MEDIO MAYOREO":318,"CLIENTES FORÁNEOS":293},{"NOMBRE DEL PRODUCTO":"MASS TECH EXTREME 2000","CATEGORIA":"GANADORES DE PESO","MARCA":"MUSCLETECH","PRECIO VENTA":820,"MAYOREO 3 MIL":693,"MAYOREO 6 MIL":678,"MEDIO MAYOREO":743,"CLIENTES FORÁNEOS":718},{"NOMBRE DEL PRODUCTO":"MESOFRANCE PEPTONAS","CATEGORIA":"OTROS","MARCA":"MESOFRANCE","PRECIO VENTA":600,"MAYOREO 3 MIL":410,"MAYOREO 6 MIL":387,"MEDIO MAYOREO":540,"CLIENTES FORÁNEOS":475},{"NOMBRE DEL PRODUCTO":"MULTI VITAMIN + TEST CHICO","CATEGORIA":"VITAMINAS/PRECURSORES","MARCA":"GAT SPORT","PRECIO VENTA":350,"MAYOREO 3 MIL":236,"MAYOREO 6 MIL":221,"MEDIO MAYOREO":286,"CLIENTES FORÁNEOS":261},{"NOMBRE DEL PRODUCTO":"MULTI VITAMIN + TEST GRANDE","CATEGORIA":"VITAMINAS/PRECURSORES","MARCA":"GAT SPORT","PRECIO VENTA":490,"MAYOREO 3 MIL":401,"MAYOREO 6 MIL":389,"MEDIO MAYOREO":441,"CLIENTES FORÁNEOS":421},{"NOMBRE DEL PRODUCTO":"MULTIVITAMINICO PLATINUM","CATEGORIA":"VITAMINAS","MARCA":"MUSCLETECH","PRECIO VENTA":350,"MAYOREO 3 MIL":242,"MAYOREO 6 MIL":227,"MEDIO MAYOREO":292,"CLIENTES FORÁNEOS":267},{"NOMBRE DEL PRODUCTO":"MUTANT MASS CHICO","CATEGORIA":"GANADORES DE PESO","MARCA":"MUTANT","PRECIO VENTA":590,"MAYOREO 3 MIL":440,"MAYOREO 6 MIL":425,"MEDIO MAYOREO":490,"CLIENTES FORÁNEOS":465},{"NOMBRE DEL PRODUCTO":"MUTANT MASS GRANDE","CATEGORIA":"GANADORES DE PESO","MARCA":"MUTANT","PRECIO VENTA":1160,"MAYOREO 3 MIL":1024,"MAYOREO 6 MIL":1009,"MEDIO MAYOREO":1074,"CLIENTES FORÁNEOS":1049},{"NOMBRE DEL PRODUCTO":"MUTANT WHEY 10 LBS","CATEGORIA":"PROTEINAS","MARCA":"MUTANT","PRECIO VENTA":1590,"MAYOREO 3 MIL":1433,"MAYOREO 6 MIL":1413,"MEDIO MAYOREO":1543,"CLIENTES FORÁNEOS":1488},{"NOMBRE DEL PRODUCTO":"MUTANT WHEY 5 LBS","CATEGORIA":"PROTEINAS","MARCA":"MUTANT","PRECIO VENTA":920,"MAYOREO 3 MIL":795,"MAYOREO 6 MIL":780,"MEDIO MAYOREO":845,"CLIENTES FORÁNEOS":820},{"NOMBRE DEL PRODUCTO":"MUTANT WHEY DUAL","CATEGORIA":"PROTEINAS","MARCA":"MUTANT","PRECIO VENTA":860,"MAYOREO 3 MIL":739,"MAYOREO 6 MIL":724,"MEDIO MAYOREO":789,"CLIENTES FORÁNEOS":764},{"NOMBRE DEL PRODUCTO":"NITRAFLEX","CATEGORIA":"PRE ENTRENOS","MARCA":"GAT SPORT","PRECIO VENTA":560,"MAYOREO 3 MIL":386,"MAYOREO 6 MIL":366,"MEDIO MAYOREO":496,"CLIENTES FORÁNEOS":441},{"NOMBRE DEL PRODUCTO":"NITRO TECH PERFORMANCE 4 LBS","CATEGORIA":"PROTEINAS","MARCA":"MUSCLETECH","PRECIO VENTA":1090,"MAYOREO 3 MIL":991,"MAYOREO 6 MIL":979,"MEDIO MAYOREO":1031,"CLIENTES FORÁNEOS":1011},{"NOMBRE DEL PRODUCTO":"NITRO TECH WHEY GOLD 2 LBS","CATEGORIA":"PROTEINAS","MARCA":"MUSCLETECH","PRECIO VENTA":760,"MAYOREO 3 MIL":650,"MAYOREO 6 MIL":635,"MEDIO MAYOREO":700,"CLIENTES FORÁNEOS":675},{"NOMBRE DEL PRODUCTO":"NITRO TECH WHEY GOLD 5 LBS","CATEGORIA":"PROTEINAS","MARCA":"MUSCLETECH","PRECIO VENTA":1250,"MAYOREO 3 MIL":1131,"MAYOREO 6 MIL":1116,"MEDIO MAYOREO":1181,"CLIENTES FORÁNEOS":1156},{"NOMBRE DEL PRODUCTO":"NITROTECH RIPPED 4 LBS","CATEGORIA":"PROTEINAS","MARCA":"MUSCLETECH","PRECIO VENTA":1090,"MAYOREO 3 MIL":986,"MAYOREO 6 MIL":971,"MEDIO MAYOREO":1036,"CLIENTES FORÁNEOS":1011},{"NOMBRE DEL PRODUCTO":"OMEGA 3 GAT","CATEGORIA":"VITAMINAS","MARCA":"GAT SPORT","PRECIO VENTA":430,"MAYOREO 3 MIL":252,"MAYOREO 6 MIL":234,"MEDIO MAYOREO":322,"CLIENTES FORÁNEOS":287},{"NOMBRE DEL PRODUCTO":"OPTI MEN","CATEGORIA":"VITAMINAS","MARCA":"ON","PRECIO VENTA":600,"MAYOREO 3 MIL":487,"MAYOREO 6 MIL":472,"MEDIO MAYOREO":537,"CLIENTES FORÁNEOS":512},{"NOMBRE DEL PRODUCTO":"OPTI WOMEN","CATEGORIA":"VITAMINAS","MARCA":"ON","PRECIO VENTA":470,"MAYOREO 3 MIL":380,"MAYOREO 6 MIL":368,"MEDIO MAYOREO":420,"CLIENTES FORÁNEOS":400},{"NOMBRE DEL PRODUCTO":"PHANTOM XS","CATEGORIA":"QUEMADORES","MARCA":"NUBREED","PRECIO VENTA":420,"MAYOREO 3 MIL":317,"MAYOREO 6 MIL":305,"MEDIO MAYOREO":357,"CLIENTES FORÁNEOS":337},{"NOMBRE DEL PRODUCTO":"PHARLABS ISOLATE","CATEGORIA":"PROTEINAS","MARCA":"PHARLABS","PRECIO VENTA":790,"MAYOREO 3 MIL":640,"MAYOREO 6 MIL":625,"MEDIO MAYOREO":690,"CLIENTES FORÁNEOS":665},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC DORADO","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":520,"MAYOREO 3 MIL":381,"MAYOREO 6 MIL":366,"MEDIO MAYOREO":431,"CLIENTES FORÁNEOS":406},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC NEGRO","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":440,"MAYOREO 3 MIL":319,"MAYOREO 6 MIL":304,"MEDIO MAYOREO":369,"CLIENTES FORÁNEOS":344},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC ROJO CHICO","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":460,"MAYOREO 3 MIL":359,"MAYOREO 6 MIL":344,"MEDIO MAYOREO":409,"CLIENTES FORÁNEOS":384},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC ROJO GRANDE","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":670,"MAYOREO 3 MIL":499,"MAYOREO 6 MIL":481,"MEDIO MAYOREO":569,"CLIENTES FORÁNEOS":534},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC SAW","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":520,"MAYOREO 3 MIL":412,"MAYOREO 6 MIL":397,"MEDIO MAYOREO":462,"CLIENTES FORÁNEOS":437},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC SAW GRANDE","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":720,"MAYOREO 3 MIL":577,"MAYOREO 6 MIL":562,"MEDIO MAYOREO":627,"CLIENTES FORÁNEOS":602},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC SOBRES NEGRO","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":550,"MAYOREO 3 MIL":459,"MAYOREO 6 MIL":447,"MEDIO MAYOREO":499,"CLIENTES FORÁNEOS":479},{"NOMBRE DEL PRODUCTO":"PSYCHOTIC SOBRES ROJO","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":580,"MAYOREO 3 MIL":460,"MAYOREO 6 MIL":445,"MEDIO MAYOREO":510,"CLIENTES FORÁNEOS":485},{"NOMBRE DEL PRODUCTO":"PYSCHOTIC SOBRES DORADO","CATEGORIA":"PRE ENTRENOS","MARCA":"INSANE","PRECIO VENTA":590,"MAYOREO 3 MIL":489,"MAYOREO 6 MIL":477,"MEDIO MAYOREO":529,"CLIENTES FORÁNEOS":509},{"NOMBRE DEL PRODUCTO":"REYKON CREATINA GRANDE","CATEGORIA":"CREATINAS","MARCA":"REYKON","PRECIO VENTA":430,"MAYOREO 3 MIL":267,"MAYOREO 6 MIL":249,"MEDIO MAYOREO":337,"CLIENTES FORÁNEOS":302},{"NOMBRE DEL PRODUCTO":"REYKON PRIMATE BURST","CATEGORIA":"PROTEINAS","MARCA":"REYKON","PRECIO VENTA":650,"MAYOREO 3 MIL":485,"MAYOREO 6 MIL":465,"MEDIO MAYOREO":595,"CLIENTES FORÁNEOS":540},{"NOMBRE DEL PRODUCTO":"REYKON ZERO 1 KG","CATEGORIA":"PROTEINAS","MARCA":"REYKON","PRECIO VENTA":350,"MAYOREO 3 MIL":200,"MAYOREO 6 MIL":185,"MEDIO MAYOREO":250,"CLIENTES FORÁNEOS":225},{"NOMBRE DEL PRODUCTO":"REYKON ZERO 10 KG","CATEGORIA":"PROTEINAS","MARCA":"REYKON","PRECIO VENTA":1350,"MAYOREO 3 MIL":965,"MAYOREO 6 MIL":942,"MEDIO MAYOREO":1095,"CLIENTES FORÁNEOS":1030},{"NOMBRE DEL PRODUCTO":"REYKON ZERO 6 KG","CATEGORIA":"PROTEINAS","MARCA":"REYKON","PRECIO VENTA":950,"MAYOREO 3 MIL":585,"MAYOREO 6 MIL":562,"MEDIO MAYOREO":715,"CLIENTES FORÁNEOS":650},{"NOMBRE DEL PRODUCTO":"REYKON ZERO MULTISABOR","CATEGORIA":"PROTEINAS","MARCA":"REYKON","PRECIO VENTA":950,"MAYOREO 3 MIL":705,"MAYOREO 6 MIL":682,"MEDIO MAYOREO":835,"CLIENTES FORÁNEOS":770},{"NOMBRE DEL PRODUCTO":"RYSE LOADED PRE","CATEGORIA":"PRE ENTRENOS","MARCA":"RYSE","PRECIO VENTA":660,"MAYOREO 3 MIL":520,"MAYOREO 6 MIL":505,"MEDIO MAYOREO":570,"CLIENTES FORÁNEOS":545},{"NOMBRE DEL PRODUCTO":"SERIOUS MASS CHICO","CATEGORIA":"GANADORES DE PESO","MARCA":"ON","PRECIO VENTA":820,"MAYOREO 3 MIL":676,"MAYOREO 6 MIL":661,"MEDIO MAYOREO":726,"CLIENTES FORÁNEOS":701},{"NOMBRE DEL PRODUCTO":"SERIOUS MASS GRANDE","CATEGORIA":"GANADORES DE PESO","MARCA":"ON","PRECIO VENTA":1220,"MAYOREO 3 MIL":1084,"MAYOREO 6 MIL":1069,"MEDIO MAYOREO":1134,"CLIENTES FORÁNEOS":1109},{"NOMBRE DEL PRODUCTO":"SHAKER COLOR LISO","CATEGORIA":"ACCESORIOS","MARCA":"BLENDER BOTTLE","PRECIO VENTA":280,"MAYOREO 3 MIL":208,"MAYOREO 6 MIL":196,"MEDIO MAYOREO":248,"CLIENTES FORÁNEOS":228},{"NOMBRE DEL PRODUCTO":"SHAKER SYNTRAX","CATEGORIA":"ACCESORIOS","MARCA":"SYNTRAX","PRECIO VENTA":230,"MAYOREO 3 MIL":135,"MAYOREO 6 MIL":123,"MEDIO MAYOREO":175,"CLIENTES FORÁNEOS":155},{"NOMBRE DEL PRODUCTO":"SHAKER GARRAFON","CATEGORIA":"ACCESORIOS","MARCA":"BSN","PRECIO VENTA":280,"MAYOREO 3 MIL":180,"MAYOREO 6 MIL":168,"MEDIO MAYOREO":220,"CLIENTES FORÁNEOS":200},{"NOMBRE DEL PRODUCTO":"SHAKER SUPER HEROES","CATEGORIA":"ACCESORIOS","MARCA":"PERFECT","PRECIO VENTA":320,"MAYOREO 3 MIL":243,"MAYOREO 6 MIL":231,"MEDIO MAYOREO":283,"CLIENTES FORÁNEOS":263},{"NOMBRE DEL PRODUCTO":"STRAPS (CAYERAS)","CATEGORIA":"ACCESORIOS","MARCA":"-","PRECIO VENTA":250,"MAYOREO 3 MIL":170,"MAYOREO 6 MIL":158,"MEDIO MAYOREO":210,"CLIENTES FORÁNEOS":190},{"NOMBRE DEL PRODUCTO":"TESTROL GOLD","CATEGORIA":"PRECURSORES","MARCA":"GAT SPORT","PRECIO VENTA":530,"MAYOREO 3 MIL":350,"MAYOREO 6 MIL":330,"MEDIO MAYOREO":460,"CLIENTES FORÁNEOS":405},{"NOMBRE DEL PRODUCTO":"TESTROL ORIGINAL","CATEGORIA":"PRECURSORES","MARCA":"GAT SPORT","PRECIO VENTA":500,"MAYOREO 3 MIL":324,"MAYOREO 6 MIL":301,"MEDIO MAYOREO":454,"CLIENTES FORÁNEOS":389},{"NOMBRE DEL PRODUCTO":"THE CURSE","CATEGORIA":"PRE ENTRENOS","MARCA":"COBRA LABS","PRECIO VENTA":500,"MAYOREO 3 MIL":361,"MAYOREO 6 MIL":343,"MEDIO MAYOREO":431,"CLIENTES FORÁNEOS":396},{"NOMBRE DEL PRODUCTO":"TOTAL WAR","CATEGORIA":"PRE ENTRENOS","MARCA":"REDCON1","PRECIO VENTA":530,"MAYOREO 3 MIL":397,"MAYOREO 6 MIL":379,"MEDIO MAYOREO":467,"CLIENTES FORÁNEOS":432},{"NOMBRE DEL PRODUCTO":"VAPOR X","CATEGORIA":"PRE ENTRENOS","MARCA":"MUSCLETECH","PRECIO VENTA":460,"MAYOREO 3 MIL":357,"MAYOREO 6 MIL":342,"MEDIO MAYOREO":407,"CLIENTES FORÁNEOS":382},{"NOMBRE DEL PRODUCTO":"VENOM INFERNO","CATEGORIA":"PRE ENTRENOS","MARCA":"DRAGON PHARMA","PRECIO VENTA":520,"MAYOREO 3 MIL":414,"MAYOREO 6 MIL":402,"MEDIO MAYOREO":454,"CLIENTES FORÁNEOS":434},{"NOMBRE DEL PRODUCTO":"VITAMINA C INSANE","CATEGORIA":"VITAMINAS","MARCA":"INSANE","PRECIO VENTA":340,"MAYOREO 3 MIL":216,"MAYOREO 6 MIL":201,"MEDIO MAYOREO":266,"CLIENTES FORÁNEOS":241},{"NOMBRE DEL PRODUCTO":"WHEY HD","CATEGORIA":"PROTEINAS","MARCA":"BPI","PRECIO VENTA":990,"MAYOREO 3 MIL":890,"MAYOREO 6 MIL":878,"MEDIO MAYOREO":930,"CLIENTES FORÁNEOS":910},{"NOMBRE DEL PRODUCTO":"XTINCTION MULTISABOR","CATEGORIA":"PROTEINAS","MARCA":"XTINCTION","PRECIO VENTA":850,"MAYOREO 3 MIL":605,"MAYOREO 6 MIL":582,"MEDIO MAYOREO":735,"CLIENTES FORÁNEOS":670},{"NOMBRE DEL PRODUCTO":"YOHIMBINE","CATEGORIA":"QUEMADORES","MARCA":"ALLMAX","PRECIO VENTA":350,"MAYOREO 3 MIL":251,"MAYOREO 6 MIL":239,"MEDIO MAYOREO":291,"CLIENTES FORÁNEOS":271},{"NOMBRE DEL PRODUCTO":"ZMAG GAT","CATEGORIA":"OTROS","MARCA":"GAT SPORT","PRECIO VENTA":320,"MAYOREO 3 MIL":216,"MAYOREO 6 MIL":204,"MEDIO MAYOREO":256,"CLIENTES FORÁNEOS":236}];
 
 // ══════════════════ STATE ══════════════════
 const CAT_COLORS={'PROTEINAS':'#ff3d00','PRE ENTRENOS':'#ff8c42','CREATINAS':'#00e5ff','OTROS':'#6b7194','QUEMADORES':'#ff4081','VITAMINAS':'#00e676','ACCESORIOS':'#ffd740','AMINOACIDOS':'#40c4ff','GANADORES DE PESO':'#b388ff','COLAGENOS':'#ff80ab','GLUTAMINAS':'#69f0ae','FARMACOLOGIA':'#ff6d00','PRECURSORES':'#ea80fc','VITAMINAS/PRECURSORES':'#ccff90','AMINOACIDOS/GLUTAMINAS':'#84ffff'};
@@ -3065,7 +3116,7 @@ function setGlobalPrice(key){
   document.querySelectorAll('#global-price-selector .ptype-btn').forEach(b=>b.classList.toggle('active',b.dataset.key===key));
   renderProductList();
   // Update existing quote items to new price type
-  quoteItems.forEach(item=>{item.priceKey=key;item.unitPrice=item.product[key];});
+  quoteItems.forEach(item=>{if(item.manual||item.product[key]===undefined)return;item.priceKey=key;item.unitPrice=item.product[key];});
   recalcTotals();
   renderQuoteItems();
 }
@@ -3109,6 +3160,43 @@ function renderProductList(){
   }).join('');
 }
 
+// ── PRODUCTO MANUAL ──
+function addManualProduct(){
+  const nameEl=document.getElementById('manual-name');
+  const priceEl=document.getElementById('manual-price');
+  const qtyEl=document.getElementById('manual-qty');
+  const name=nameEl.value.trim();
+  const price=parseFloat(priceEl.value)||0;
+  const qty=Math.max(1,parseInt(qtyEl.value)||1);
+  if(!name){
+    nameEl.focus();
+    nameEl.style.borderColor='var(--accent)';
+    nameEl.placeholder='⚠️ Escribe un nombre';
+    setTimeout(()=>{nameEl.style.borderColor='';nameEl.placeholder='Ej. Vitamina D3 Genérica';},1800);
+    return;
+  }
+  if(price<=0){
+    priceEl.focus();
+    priceEl.style.borderColor='var(--accent)';
+    setTimeout(()=>{priceEl.style.borderColor='';},1800);
+    return;
+  }
+  quoteItems.push({
+    manual:true,
+    product:{'NOMBRE DEL PRODUCTO':name,'MARCA':'—','CATEGORIA':'MANUAL'},
+    priceKey:'PRECIO VENTA',
+    unitPrice:price,
+    qty:qty,
+    id:'manual_'+Date.now()
+  });
+  nameEl.value='';
+  priceEl.value='';
+  qtyEl.value='1';
+  nameEl.focus();
+  renderQuoteItems();
+  recalcTotals();
+}
+
 function addToQuote(idx){
   const prod=RAW[idx];
   const existing=quoteItems.find(i=>i.product===prod&&i.priceKey===globalPriceKey);
@@ -3144,6 +3232,48 @@ function setQty(id,val){
 function renderItemSubtotal(id,item){
   const el=document.getElementById('sub_'+id);
   if(el)el.textContent=fmt(item.unitPrice*item.qty);
+  refreshFlavorHint(item);
+}
+
+// ── Sabores / notas por producto ──
+function setFlavors(id,val){
+  const item=quoteItems.find(i=>i.id===id);
+  if(!item)return;
+  item.flavors=val;
+  refreshFlavorHint(item);
+}
+// Devuelve "(2 chocolate, 1 vainilla)" o '' si no hay nada. Si ya traía paréntesis, no los duplica.
+function flavorsText(item){
+  let t=(item.flavors||'').trim();
+  if(!t)return '';
+  t=t.replace(/^\(+/,'').replace(/\)+$/,'').trim();
+  return t?'('+t+')':'';
+}
+// Si todos los sabores empiezan con número, avisa si la suma coincide con las piezas.
+function flavorHintData(item){
+  const t=(item.flavors||'').trim().replace(/^\(+/,'').replace(/\)+$/,'');
+  if(!t)return null;
+  const parts=t.split(',').map(x=>x.trim()).filter(Boolean);
+  if(!parts.length)return null;
+  let sum=0;
+  for(const p of parts){
+    const m=p.match(/^(\d+)\s*\S/);
+    if(!m)return null;
+    sum+=parseInt(m[1]);
+  }
+  return {sum:sum,ok:sum===item.qty};
+}
+function flavorHintHTML(item){
+  const d=flavorHintData(item);
+  if(!d)return '';
+  return d.ok?'✓ '+d.sum+' de '+item.qty+' pzas':'⚠ Los sabores suman '+d.sum+' de '+item.qty+' pzas';
+}
+function refreshFlavorHint(item){
+  const el=document.getElementById('flh_'+item.id);
+  if(!el)return;
+  const d=flavorHintData(item);
+  el.className='qi-flavor-hint'+(d?(d.ok?' ok':' warn'):'');
+  el.textContent=flavorHintHTML(item);
 }
 
 function renderQuoteItems(){
@@ -3164,8 +3294,8 @@ function renderQuoteItems(){
     <div class="quote-item">
       <div class="qi-top">
         <div>
-          <div class="qi-name">${item.product['NOMBRE DEL PRODUCTO']}</div>
-          <div class="qi-brand">${item.product.MARCA} · ${item.product.CATEGORIA}</div>
+          <div class="qi-name">${item.product['NOMBRE DEL PRODUCTO']}${item.manual?'<span class="qi-manual-badge">MANUAL</span>':''}</div>
+          <div class="qi-brand">${item.manual?'Producto personalizado':item.product.MARCA+' · '+item.product.CATEGORIA}</div>
         </div>
         <button class="qi-remove" onclick="removeFromQuote('${item.id}')" title="Quitar">×</button>
       </div>
@@ -3178,9 +3308,11 @@ function renderQuoteItems(){
         <span class="qi-unit">× ${fmt(item.unitPrice)}</span>
         <div style="margin-left:auto;text-align:right">
           <div class="qi-subtotal" id="sub_${item.id}">${fmt(item.unitPrice*item.qty)}</div>
-          <div class="qi-price-type">${priceLbls[item.priceKey]||item.priceKey}</div>
+          <div class="qi-price-type">${item.manual?'✏️ Manual':priceLbls[item.priceKey]||item.priceKey}</div>
         </div>
       </div>
+      <input class="qi-flavors" id="fl_${item.id}" type="text" placeholder="Sabores / nota: 2 chocolate, 1 vainilla…" value="${histEsc(item.flavors||'')}" oninput="setFlavors('${item.id}',this.value)">
+      <div class="qi-flavor-hint" id="flh_${item.id}">${flavorHintHTML(item)}</div>
     </div>`).join('');
 }
 
@@ -3208,7 +3340,7 @@ function clearQuote(){
   document.getElementById('c-phone').value='';
   document.getElementById('c-city').value='';
   document.getElementById('c-notes').value='';
-  quoteCounter++;
+  quoteCounter=Math.max(histNextFolio(),quoteCounter+1);
   document.getElementById('quote-num').innerHTML=`COT-${String(quoteCounter).padStart(3,'0')} · <span id="quote-date">${new Date().toLocaleDateString('es-MX')}</span>`;
   renderQuoteItems();
   recalcTotals();
@@ -3222,10 +3354,11 @@ function copyQuote(){
   const total=subtotal*(1-disc/100);
   const priceLbls={'PRECIO VENTA':'Precio Venta','MAYOREO 3 MIL':'Mayoreo $3K','MAYOREO 6 MIL':'Mayoreo $6K','MEDIO MAYOREO':'Medio Mayoreo','CLIENTES FORÁNEOS':'Foráneos'};
   let txt=`🏋️ POWER REAXION — Cotización\n📋 COT-${String(quoteCounter).padStart(3,'0')} · ${new Date().toLocaleDateString('es-MX')}\n👤 Cliente: ${client}\n${'─'.repeat(40)}\n`;
-  quoteItems.forEach(i=>{txt+=`• ${i.product['NOMBRE DEL PRODUCTO']}\n  ${i.qty} pza × ${fmt(i.unitPrice)} (${priceLbls[i.priceKey]||i.priceKey}) = ${fmt(i.unitPrice*i.qty)}\n`;});
+  quoteItems.forEach(i=>{txt+=`• ${i.product['NOMBRE DEL PRODUCTO']}\n${flavorsText(i)?'  '+flavorsText(i)+'\n':''}  ${i.qty} pza × ${fmt(i.unitPrice)} (${priceLbls[i.priceKey]||i.priceKey}) = ${fmt(i.unitPrice*i.qty)}\n`;});
   txt+=`${'─'.repeat(40)}\n💰 Subtotal: ${fmt2(subtotal)}`;
   if(disc>0)txt+=`\n🏷️ Descuento (${disc}%): -${fmt2(subtotal*disc/100)}`;
   txt+=`\n✅ TOTAL: ${fmt2(total)}`;
+  histSave();
   navigator.clipboard.writeText(txt).then(()=>{alert('✅ Cotización copiada al portapapeles');}).catch(()=>{prompt('Copia este texto:',txt);});
 }
 
@@ -3253,6 +3386,7 @@ function shareWhatsApp(){
   msg+='━━━━━━━━━━━━━━━━━━━━━━\n';
   quoteItems.forEach((item,i)=>{
     msg+=`*${i+1}. ${item.product['NOMBRE DEL PRODUCTO'].trim()}*\n`;
+    if(flavorsText(item)) msg+=`   ${flavorsText(item)}\n`;
     msg+=`   ${item.qty} pza × ${fmt(item.unitPrice)} (${priceLbls[item.priceKey]||item.priceKey}) = *${fmt(item.unitPrice*item.qty)}*\n`;
   });
   msg+='━━━━━━━━━━━━━━━━━━━━━━\n';
@@ -3265,13 +3399,177 @@ function shareWhatsApp(){
   if(notes) msg+=`\n📝 _${notes}_\n`;
   msg+='\n_Cotización válida por 7 días · Precios en MXN_';
 
+  histSave();
   const url='https://wa.me/?text='+encodeURIComponent(msg);
   window.open(url,'_blank');
+}
+
+// ══════════════════ HISTORIAL DE COTIZACIONES ══════════════════
+// Se guarda en el navegador de este dispositivo (localStorage) y se borra solo a los 15 días.
+const HIST_KEY='cotz_historial_v1';
+const HIST_NEXT_KEY='cotz_next_folio_v1';
+const HIST_DAYS=15;
+const DAY_MS=86400000;
+
+function histRead(){
+  try{
+    const arr=JSON.parse(localStorage.getItem(HIST_KEY)||'[]');
+    if(!Array.isArray(arr))return [];
+    const lim=Date.now()-HIST_DAYS*DAY_MS;
+    const keep=arr.filter(e=>e&&e.savedAt>=lim&&Array.isArray(e.items));
+    if(keep.length!==arr.length)localStorage.setItem(HIST_KEY,JSON.stringify(keep));
+    return keep;
+  }catch(e){return [];}
+}
+function histWrite(arr){
+  try{localStorage.setItem(HIST_KEY,JSON.stringify(arr));return true;}catch(e){return false;}
+}
+function histNextFolio(){
+  try{return parseInt(localStorage.getItem(HIST_NEXT_KEY))||1;}catch(e){return 1;}
+}
+function histSetNext(n){
+  try{localStorage.setItem(HIST_NEXT_KEY,String(n));}catch(e){}
+}
+function histEsc(t){
+  return String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function histToast(msg,ms){
+  const el=document.getElementById('cotz-toast');
+  if(!el)return;
+  el.textContent=msg;
+  el.classList.add('show');
+  clearTimeout(histToast._t);
+  histToast._t=setTimeout(()=>el.classList.remove('show'),ms||2600);
+}
+function updateQuoteNum(){
+  document.getElementById('quote-num').innerHTML=`COT-${String(quoteCounter).padStart(3,'0')} · <span id="quote-date">${new Date().toLocaleDateString('es-MX')}</span>`;
+}
+function histRefreshCount(){
+  const el=document.getElementById('hist-count');
+  if(el)el.textContent=histRead().length;
+}
+
+// Guarda (o actualiza) la cotización actual. Si ya existía ese folio, lo reemplaza: no se duplica.
+function histSave(){
+  if(!quoteItems.length)return;
+  const disc=parseFloat(document.getElementById('extra-discount').value)||0;
+  const subtotal=quoteItems.reduce((s,i)=>s+i.unitPrice*i.qty,0);
+  const entry={
+    folio:quoteCounter,
+    savedAt:Date.now(),
+    client:document.getElementById('c-name').value||'',
+    phone:document.getElementById('c-phone').value||'',
+    city:document.getElementById('c-city').value||'',
+    notes:document.getElementById('c-notes').value||'',
+    disc:disc,
+    priceKey:globalPriceKey,
+    total:subtotal*(1-disc/100),
+    qty:quoteItems.reduce((s,i)=>s+i.qty,0),
+    items:quoteItems.map(i=>({
+      manual:!!i.manual,
+      name:i.product['NOMBRE DEL PRODUCTO'],
+      brand:i.product.MARCA,
+      cat:i.product.CATEGORIA,
+      priceKey:i.priceKey,
+      unitPrice:i.unitPrice,
+      qty:i.qty,
+      flavors:i.flavors||''
+    }))
+  };
+  const arr=histRead().filter(e=>e.folio!==entry.folio);
+  arr.push(entry);
+  if(histWrite(arr)){
+    histSetNext(Math.max(histNextFolio(),entry.folio+1));
+    histToast('✅ COT-'+String(entry.folio).padStart(3,'0')+' guardada en el historial');
+  }else{
+    histToast('⚠️ No se pudo guardar en el historial de este navegador',4000);
+  }
+  histRefreshCount();
+}
+
+function histOpen(){
+  const arr=histRead().sort((a,b)=>b.savedAt-a.savedAt);
+  const body=document.getElementById('hist-body');
+  if(!arr.length){
+    body.innerHTML='<div class="hist-empty">Aún no hay cotizaciones guardadas.<br>Se guardan solas cuando las envías por WhatsApp, las copias o las generas.</div>';
+  }else{
+    body.innerHTML=arr.map(e=>{
+      const left=Math.max(0,Math.ceil((e.savedAt+HIST_DAYS*DAY_MS-Date.now())/DAY_MS));
+      const f=new Date(e.savedAt);
+      const fecha=f.toLocaleDateString('es-MX',{day:'2-digit',month:'short'})+' '+f.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'});
+      const n=e.items.length;
+      return `<div class="hist-item">
+        <div class="hist-main">
+          <div class="hist-top"><span class="hist-folio">COT-${String(e.folio).padStart(3,'0')}</span> · ${histEsc(e.client||'Sin nombre')}</div>
+          <div class="hist-sub">${fecha} · ${n} ${n===1?'producto':'productos'} · ${fmt2(e.total)}<br>Se borra en ${left} ${left===1?'día':'días'}</div>
+        </div>
+        <div class="hist-btns">
+          <button class="hist-open" onclick="histLoad(${e.folio})">Abrir</button>
+          <button class="hist-del" onclick="histDelete(${e.folio})" title="Borrar">🗑</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  document.getElementById('modal-history').classList.add('show');
+}
+function histClose(){document.getElementById('modal-history').classList.remove('show');}
+
+function histDelete(folio){
+  if(!confirm('¿Borrar COT-'+String(folio).padStart(3,'0')+' del historial?'))return;
+  histWrite(histRead().filter(e=>e.folio!==folio));
+  histRefreshCount();
+  histOpen();
+}
+
+// Abre una cotización guardada para editarla. Respeta los precios que se cotizaron.
+function histLoad(folio){
+  const e=histRead().find(x=>x.folio===folio);
+  if(!e){histToast('No se encontró esa cotización');return;}
+  if(quoteItems.length&&!confirm('Se reemplazará la cotización que tienes abierta ahora. ¿Continuar?'))return;
+
+  let changed=0;
+  quoteItems=e.items.map((it,i)=>{
+    if(it.manual){
+      return {manual:true,product:{'NOMBRE DEL PRODUCTO':it.name,'MARCA':'—','CATEGORIA':'MANUAL'},priceKey:'PRECIO VENTA',unitPrice:it.unitPrice,qty:it.qty,flavors:it.flavors||'',id:'manual_'+Date.now()+'_'+i};
+    }
+    const prod=RAW.find(p=>p['NOMBRE DEL PRODUCTO']===it.name);
+    if(prod&&prod[it.priceKey]!==undefined&&prod[it.priceKey]!==it.unitPrice)changed++;
+    return {
+      product:prod||{'NOMBRE DEL PRODUCTO':it.name,'MARCA':it.brand||'—','CATEGORIA':it.cat||'—'},
+      priceKey:it.priceKey,
+      unitPrice:it.unitPrice,
+      qty:it.qty,
+      flavors:it.flavors||'',
+      id:Date.now()+'_'+i
+    };
+  });
+
+  document.getElementById('c-name').value=e.client||'';
+  document.getElementById('c-phone').value=e.phone||'';
+  document.getElementById('c-city').value=e.city||'';
+  document.getElementById('c-notes').value=e.notes||'';
+  document.getElementById('extra-discount').value=e.disc||0;
+
+  if(e.priceKey){
+    globalPriceKey=e.priceKey;
+    document.querySelectorAll('#global-price-selector .ptype-btn').forEach(b=>b.classList.toggle('active',b.dataset.key===globalPriceKey));
+    renderProductList();
+  }
+  quoteCounter=e.folio;
+  updateQuoteNum();
+  renderQuoteItems();
+  recalcTotals();
+  histClose();
+  switchTab('cotizador');
+  let msg='COT-'+String(e.folio).padStart(3,'0')+' abierta. Haz los cambios y vuelve a enviarla.';
+  if(changed)msg+=' ⚠️ '+changed+' '+(changed===1?'producto tiene':'productos tienen')+' precio distinto en el catálogo actual; se dejó el precio que cotizaste.';
+  histToast(msg,changed?7000:3500);
 }
 
 // Print modal
 function openPrintModal(){
   if(!quoteItems.length){alert('Agrega productos a la cotización primero.');return;}
+  histSave();
   const disc=parseFloat(document.getElementById('extra-discount').value)||0;
   const subtotal=quoteItems.reduce((s,i)=>s+i.unitPrice*i.qty,0);
   const discAmt=subtotal*(disc/100);
@@ -3308,7 +3606,7 @@ function openPrintModal(){
       <tbody>
         ${quoteItems.map((item,i)=>`<tr>
           <td>${i+1}</td>
-          <td><strong>${item.product['NOMBRE DEL PRODUCTO']}</strong><br><small style="color:#888">${item.product.CATEGORIA}</small></td>
+          <td><strong>${item.product['NOMBRE DEL PRODUCTO']}</strong><br><small style="color:#888">${item.product.CATEGORIA}</small>${flavorsText(item)?'<br><small style="color:#444">Sabores: '+histEsc(flavorsText(item))+'</small>':''}</td>
           <td>${item.product.MARCA}</td>
           <td>${priceLbls[item.priceKey]||item.priceKey}</td>
           <td class="num">${fmt2(item.unitPrice)}</td>
@@ -3656,7 +3954,9 @@ function saveUpdatedHTML(){
   setTimeout(()=>resetUploadModal(), 500);
 }
 function closeUploadModal(e){ if(e.target===document.getElementById('modal-upload'))resetUploadModal(); }
-document.getElementById('quote-date').textContent=new Date().toLocaleDateString('es-MX');
+quoteCounter=histNextFolio();
+updateQuoteNum();
+histRefreshCount();
 populateCotizadorSelects();
 filterProducts();
 recalcTotals();
